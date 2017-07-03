@@ -1,0 +1,155 @@
+
+
+<% headboard = function(){
+	var dhg = `
+		${headboard_style()} 
+		  <script type="text/javascript">
+    function googleTranslateElementInit() {
+	  setTimeout(function(){
+	    $(".goog-te-banner-frame").hide();
+	    $("body").attr("style","");
+	    // $(".goog-te-banner-frame").hide();
+	  },1000);
+	  new google.translate.TranslateElement({pageLanguage: 'es', includedLanguages: 'ht,pt,zh-TW,ja,fr,de,ru,es', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, multilanguagePage: true}, 'google_translate_element');
+
+	}
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
+  <script>
+  </script>
+  <div class="section head">
+    <div class="container ">
+      <div class="row align-items-center">
+        <div class="col-2 hidden-md-down">
+          <a href="http://directorioinmigrante.com:49155/noticia_inmigrante">
+            <img class="center-block img-fluid" style="width:90%;border-radius:11px;" src="http://directorioinmigrante.com:49155/img/logo1.png">
+          </a>
+        </div>
+        <div class="col-8 text-center">
+          <div style="text-shadow:3px 3px 10px #666;color:orange; transform: rotateX(30deg); transition: transform 2000ms ease;">
+            <span id="render"></span>
+            <span class="lead titulo_solplast">DirectorioInmigrante</span>
+          </div>
+        </div>
+        <div class="col-2 hidden-md-down">
+          <a href="http://directorioinmigrante.com/views/view_website.php?v=www.serviciosatm.cl">
+            <img class="center-block img-fluid" src="http://directorioinmigrante.com/public/img/LOGOS/logo-de-serviciosATM.jpg" style="width:90%;border-radius:11px;">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="height:3px;background:#1D1DB6;width:100%;"></div>
+  <div style="height:3px;background:#F0F017;width:100%;"></div>
+  <div style="height:3px;background:#D01414;width:100%;"></div>
+  <div class="bg-faded section">
+    <div style="background-color:#E5E5E5;height:0.5;z-index:1000000;margin-top:-0px;margin-left:20px;position: absolute;font-size: 12px;text-shadow: 0px 0px 0px ">
+      <span style="color:#2845D7;">Seleccione</span>
+      <span style="color:#EB1414;">idioma:</span>
+      <span id="google_translate_element"></span>
+    </div>
+    <div class="container" id='menu1'>
+      <div class="row ">
+        <div class="col-lg-12   col-md-offset-2">
+          <ul class="nav nav-tabs justify-content-center">
+            <li class="nav-item">
+              <a href="http://directorioinmigrante.com/views/index.php" class="nav-link">Inicio</a>
+            </li>
+            <!-- <li class="nav-item">
+              <a href="#" class="nav-link">Visita Santiago</a>
+            </li> -->
+            <li class="nav-item">
+              <a href="http://directorioinmigrante.com/views/buscador_turistico.php" class="nav-link">Buscador Turistico</a>
+            </li>
+            <li class="nav-item">
+              <a href="http://directorioinmigrante.com/views/buscador_empresarial.php" class="nav-link">Buscador Empresarial</a>
+            </li>
+            <li class="nav-item ">
+              <a href="bolsa_trabajo_1" class="nav-link">Empleos</a>
+            </li>
+            <li class="nav-item ">
+              <a href="virtual_brokerage" class="nav-link active">Corretaje Virtual</a>
+            </li>
+            <li class="nav-item ">
+              <a href="login" class="nav-link" style='color:#18ACBD;'><i class="fa fa-user fa-fw"></i><b>Iniciar Sessión</b></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="background-color:#E5E5E5;height:0.5;z-index:0;margin-top:-1px;"></div>
+	`;
+	return dhg;	
+} %>
+
+<% headboard_style = function(){
+	var dhg = `
+	 <script src="js/three.min.js"></script>
+	  <style>
+	    .head {
+	      /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#c5d2e8+0,000989+44 */
+	      background: rgb(197, 210, 232);
+	      /* Old browsers */
+	      background: -moz-linear-gradient(top, rgba(197, 210, 232, 1) 0%, rgba(0, 9, 137, 1) 44%);
+	      /* FF3.6+ */
+	      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(197, 210, 232, 1)), color-stop(44%, rgba(0, 9, 137, 1)));
+	      /* Chrome,Safari4+ */
+	      background: -webkit-linear-gradient(top, rgba(197, 210, 232, 1) 0%, rgba(0, 9, 137, 1) 44%);
+	      /* Chrome10+,Safari5.1+ */
+	      background: -o-linear-gradient(top, rgba(197, 210, 232, 1) 0%, rgba(0, 9, 137, 1) 44%);
+	      /* Opera 11.10+ */
+	      background: -ms-linear-gradient(top, rgba(197, 210, 232, 1) 0%, rgba(0, 9, 137, 1) 44%);
+	      /* IE10+ */
+	      background: linear-gradient(to bottom, rgba(197, 210, 232, 1) 0%, rgba(0, 9, 137, 1) 44%);
+	      /* W3C */
+	      filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#c5d2e8', endColorstr='#000989', GradientType=0);*/
+	    }
+	    
+	    .titulo_solplast {
+	      color: rgb(254, 191, 1);
+	      font-size: 50px;
+	      text-shadow: 1px 1px 10px #000;
+	      font-weight: bold;
+	    }
+	    
+	    .tb_post {
+	      /*margin: 4px;*/
+	      padding: 10px;
+	    }
+	    
+	    #nav_categoria a {
+	      color: gray;
+	    }
+	    
+	    .search_base {
+	      /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,f6f6f6+65,ededed+100 */
+	      background: #ffffff;
+	      /* Old browsers */
+	      background: -moz-linear-gradient(top, #ffffff 0%, #f6f6f6 65%, #ededed 100%);
+	      /* FF3.6-15 */
+	      background: -webkit-linear-gradient(top, #ffffff 0%, #f6f6f6 65%, #ededed 100%);
+	      /* Chrome10-25,Safari5.1-6 */
+	      background: linear-gradient(to bottom, #ffffff 0%, #f6f6f6 65%, #ededed 100%);
+	      /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	      filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed', GradientType=0);
+	      /* IE6-9 */
+	    }
+	    
+	    .subcategoria1 {
+	      /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,eff0ff+98,dbe6fc+100 */
+	      background: #ffffff;
+	      /* Old browsers */
+	      background: -moz-linear-gradient(top, #ffffff 0%, #eff0ff 98%, #dbe6fc 100%);
+	      /* FF3.6-15 */
+	      background: -webkit-linear-gradient(top, #ffffff 0%, #eff0ff 98%, #dbe6fc 100%);
+	      /* Chrome10-25,Safari5.1-6 */
+	      background: linear-gradient(to bottom, #ffffff 0%, #eff0ff 98%, #dbe6fc 100%);
+	      /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	      filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#dbe6fc', GradientType=0);
+	      /* IE6-9 */
+	    }
+	  </style>
+	`;
+	return dhg;	
+}%>
