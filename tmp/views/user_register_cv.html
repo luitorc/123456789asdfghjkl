@@ -1,0 +1,204 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="http://127.0.0.1:2000/lib/sb-admin-2/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="http://127.0.0.1:2000/lib/jQuery-TE_v.1.4.0/jquery-te-1.4.0.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-default">
+        <div class="panel-heading"><b>PASO 1</b> Publicación Resumida</div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-lg-7">
+              <div class="form-group">
+                <label>Titulo</label>
+                <input class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Breve Descripción</label>
+                <textarea class="form-control" rows="5"></textarea>
+                <p class="help-block" style=""><i>Le recomendamos redactar un contenido clave, para captar el interes del empleador.<br>(Max. 255 caracteres)</i>
+                </p>
+              </div>
+              <div class="form-group">
+                <label>Lugar</label>
+                <input class="form-control">
+              </div>
+            </div>
+            <div class="col-lg-5" align="center">
+              <img src="http://v4.pingendo.com/assets/photos/food/photo-1.jpg" width="80%" style="box-shadow:4px 3px 4px #999;">
+              <div class="form-group">
+                <label>Seleccione la Imagen de publicación</label>
+                <input type="file">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <button type="button" class="btn btn-outline btn-primary btn-lg btn-block" onclick="to_post();">Siguiente</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-default">
+        <div class="panel-heading"><b>PASO 2</b> Información del publicante</div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label>Nombres</label>
+                <input class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Apellidos</label>
+                <input class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Correo</label>
+                <input class="form-control">
+                <p class="help-block">Example: ejemplo_777@gmail.com</p>
+              </div>
+              <div class="form-group">
+                <label>Telefono</label>
+                <input class="form-control">
+                <p class="help-block">Example: Codigo de Pais + numero de telefono (053 555555)</p>
+              </div>
+              <div class="form-group">
+                <label>Celular 1:</label>
+                <input class="form-control">
+                <p class="help-block">Example: codigo de pais + numero de celular (053 935422111)</p>
+              </div>
+            </div>
+            <div class="col-lg-6 ">
+              <div class="form-group">
+                <label>Celular 2:</label>
+                <input class="form-control">
+                <p class="help-block">Example: codigo de pais + numero de celular (053 935422333)</p>
+              </div>
+
+              <div class="form-inline">
+                <label>Documento de Identidad</label>
+                <br>
+                <div class="form-group">
+                  <select class="form-control">
+                    <option value="seleccione">seleccione</option>
+                    <option value="DNI">DNI</option>
+                    <option value="RUC">RUC</option>
+                  </select>
+                  <input class="form-control" placeholder="Ingrese el numero aqui">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Sexo</label>
+                <select class="form-control">
+                  <option value="seleccione">seleccione</option>
+                  <option value="Hombre">Hombre</option>
+                  <option value="Mujer">Mujer</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Fecha de Nacimiento</label>
+                <input type="date" class="form-control">
+                <p class="help-block">Example: 1992-04-05</p>
+              </div>
+              <div class="form-group">
+                <label>Seleecione su CV PDF (curriculum vitae)</label>
+                <input type="file">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <button type="button" class="btn btn-outline btn-primary btn-lg btn-block" onclick="to_post();">Siguiente</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-default">
+        <div class="panel-heading"><b>PASO 3 <span style="color:blue;">(Ultimo Paso)</span></b> contenido completo de publicación</div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-lg-12">
+              <div style="font-weight: bold;font-size:20px;text-align:center;text-decoration: underline;margin:auto;display: none;">Contenido completo de la Publicación
+              </div>
+              <div style="width: 100%;margin: auto;">
+                <textarea id="content"></textarea>
+              </div>
+              <p class="help-block" style="margin-top: -30px;"><i>Aqui usted podra redactar todo el contenido que quiere mostrar a los empleadores, cuando ellos hagan click en mas detalles de publicación. <br>Le recomendamos tomarse un tiempo, he intentar hacer un contenido interesante y convencedora.</i>
+              </p>
+              <br>
+              <div class="form-group has-error">
+                <label style="color:#AC2424;">Seleccione Categoria de Bolsa de Trabajo <span style="color:red;">(Importante*)</span></label>
+                <select class="form-control">
+                  <option value="seleccione">seleccione</option>
+                  <option value="Administración">Administración</option>
+                  <option value="Call Center">Call Center</option>
+                  <option value="Comercio Exterior">Comercio Exterior</option>
+                  <option value="Comunicación">Comunicación</option>
+                </select>
+                <p class="help-block"><i>La publicación sera alojada la categoria que usted seleccione.</i></p>
+              </div>
+              <div class="checkbox">
+                <label style="color:#DA1616;">
+                  <input type="checkbox" value="on"> Acepto los terminos y condiciones, afirmo que los datos son originales, verdaderos, y estan escritos correctamente, de no ser asi, acepto asumir la sanción correspondiente.
+                </label>
+              </div>
+              <button type="button" class="btn btn-outline btn-success btn-lg btn-block" onclick="to_post();">Acepto condiciones y Postear contenido</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js" type="text/javascript"></script>
+  <script src="http://127.0.0.1:2000/lib/jQuery-TE_v.1.4.0/jquery-te-1.4.0.min.js"></script>
+  <script>
+    $('#content').jqte();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
