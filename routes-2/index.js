@@ -52,9 +52,3 @@ exports.login = function(req, res){
 	};
 	res.render('login', params);
 }
-exports.contact = function(req, res){
-	var params = {
-		title: "Contactanos"
-	};
-	res.render('contact', params);
-}

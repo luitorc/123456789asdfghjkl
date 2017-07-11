@@ -14,7 +14,7 @@
 
 
 
-    var PORT = process.env.PORT || 3500;
+    var PORT = process.env.PORT || 4000;
     // Configuration
     app.configure(function () {
         // app.set('port', process.env.PORT || 4000);
@@ -42,16 +42,12 @@
     });
 
     /*Public*/
-    //PUBLISH
     app.get('/', route.index);
-        app.post('/publish_get', lt.model('publish').get);
-        app.post('/publish_register', lt.model('publish').register);
 
     //ACCESO
     app.get('/login', route.login);
         app.post('/user_logear', lt.controller('user').logear);
-    //CONTACTO
-    app.get('/contact',route.contact);
+
 
     /*Admin - PACIENTE-INI*/
     app.get('/admin', route.admin);
