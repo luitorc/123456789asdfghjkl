@@ -15,9 +15,7 @@
 
 
     var PORT = process.env.PORT || 3500;
-    app.use(bodyParser.json({limit: '10mb'})); // support json encoded bodies
-    // app.use(bodyParser.json({limit: '28byte'})); // support json encoded bodies
-    app.use(bodyParser.urlencoded({ extended: true ,limit: '10mb'})); // support encoded bodies
+
     // Configuration
     app.configure(function () {
         // app.set('port', process.env.PORT || 4000);
@@ -26,6 +24,9 @@
         app.set('view options', { layout: false });
         app.set('views', __dirname + '/views');
 
+        app.use(bodyParser.json({limit: '10mb'})); // support json encoded bodies
+        // app.use(bodyParser.json({limit: '28byte'})); // support json encoded bodies
+        app.use(bodyParser.urlencoded({ extended: true ,limit: '10mb'})); // support encoded bodies
         app.use(express.bodyParser());
         app.use(express.methodOverride());
         app.use(express.cookieParser('token'));
