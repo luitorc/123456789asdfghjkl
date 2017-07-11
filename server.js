@@ -2,7 +2,7 @@
     // process.env.TZ = "America/New_York";
     var express = require('express'),
         http = require('http');
-
+    var bodyParser = require('body-parser');
     var lt = require('./helper/luitor_helper.js');
     var route = require('./routes');
 
