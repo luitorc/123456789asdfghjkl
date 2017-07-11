@@ -1,13 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Optica Innova</title>
-</head>
-<body>
-	<h1>Pagina de Inicio</h1>
-	<script>
-		window.location.href='login';
-	</script>
-</body>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <!-- <link href="lib/sb-admin-2/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <link rel="stylesheet" href="lib/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://lipis.github.io/bootstrap-social/bootstrap-social.css">
+  	<style>
+  		body{
+  			background-color: #F0F0F0
+  		}
+  		.box-publish{
+  			box-shadow: 3px 4px 20px #DBDBDB;
+  		}
+  		.box-publish td{
+			padding: 10px;
+  		}
+  		.promotions img{
+			box-shadow: 1px 8px 8px #ccc;
+  		}
+  		.chat_footer{
+  			position: fixed;
+  			bottom: 0px;
+  			right: 0px;
+  			width: 200px;
+  			background-color: #3A43BA;
+  			color:white;
+  			text-align: center;
+  			cursor:pointer;
+  			z-index: 1000;
+  			box-shadow: 1px 10px 10px #666;
+  			padding:6px;
+  		}
+  	</style>
+  </head>
+  <body>
+  	<a href="https://web.facebook.com/messages/t/robert.sanchez.94043" target='_blank'>
+  		<div class='chat_footer'>
+  			Realizar Consulta	
+  		</div>
+  	</a>
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+	  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  <a class="navbar-brand" href="#">Optica Innova</a>
+
+	  <div class="collapse navbar-collapse " id="navbarSupportedContent">
+	    <ul class="navbar-nav mr-auto"></ul>
+		<ul class="nav">
+			<li class="nav-item">
+				<a class="nav-link disabled" href="#">Inicio</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="contact">Contactanos</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link btn-secondary" style='color:orange;' href="login">Iniciar Sessión</a>
+			</li>
+		</ul>
+	  </div>
+	</nav>
+	<br>
+	<div class="section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 hidden-md-down">
+					<a class="btn btn-block btn-social btn-facebook" target='_blank' href="https://web.facebook.com/robert.sanchez.94043" style='color:white;'>
+						<span class="fa fa-facebook"></span> Siguenos en Facebook
+					</a>
+					<a class="btn btn-block btn-social btn-twitter" style='color:white;'>
+						<span class="fa fa-twitter"></span> Siguenos en Twitter
+					</a>
+				</div>
+				<div class="col-lg-6" align="center" style="background-color: ;" id='products'>
+					<!-- Publicación -->
+					
+
+				</div>
+				<div class="col-3 hidden-md-down text-center promotions" style='padding: 30px;'>
+					<img src="img/promocion/1.jpg" class='img-fluid' style='margin-top:-28px;'><br><br>
+					<img src="img/promocion/2.jpg" class='img-fluid'><br><br>
+					<img src="img/promocion/3.jpg" class='img-fluid'>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script>
+    	$(document).ready(function() {
+    		publish_get();
+    	});
+    	function publish_get(){
+    		$.post('/publish_get', {
+
+    		}, function(dt, textStatus, xhr) {
+
+    			publish_view(dt,function(dh){
+    				$("#products").html(dh);
+    			});
+    			// console.log(dt[0]);
+    		});
+    	}
+    	function publish_view(dt,callback){
+    		console.log(dt);
+    		var dh="";
+    		for( i in dt ){
+    			dh+="<table border='0' width='90%' style='background:white;' class='box-publish'>"
+					+"	<tr>"
+					+"		<td width='15%'><img src='img/logo.png' width='100%'></td>"
+					+"		<td width='80%'><b style='font-size:18px;'>"+dt[i].titulo+"</b></td>"
+					+"		<td width='5%' align='center' style='font-size:12px;color:#808080;'>"+dt[i].fecha_publish+"</td>"
+					+"	</tr>"
+					+"	<tr>"
+					+"		<td colspan='3' align='center'>"
+					// +"			<img src='img/product/"+dt[i].img+"' class='img-fluid'>"
+					+"			<img src='http://ilored.com/server_img/"+dt[i].img+"' class='img-fluid'>"
+					+"		</td>"
+					+"	</tr>"
+					+"	<tr>"
+					+"		<td colspan='3' style='text-align: justify;'>"+dt[i].descripcion+"</td>"
+					+"	</tr>"
+					+"	<tr style='display:none;'>"
+					+"		<td colspan='3' align='right'>"
+					+"			<a href='#'>Ver mas detalles</a>"
+					+"		</td>"
+					+"	</tr>"
+					+"</table><br>";
+    		}
+    		callback(dh);
+    	}
+    </script>
+  </body>
 </html>

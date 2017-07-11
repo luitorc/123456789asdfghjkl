@@ -5,12 +5,32 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link href="lib/sb-admin-2/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
   <link href="lib/sb-admin-2/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
+  <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="/">Optica Innova</a>
 
+    <div class="collapse navbar-collapse " id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto"></ul>
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Inicio</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="contact">Contactanos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link btn-secondary disabled" style='color:orange;' href="login">Iniciar Sessión</a>
+      </li>
+    </ul>
+    </div>
+  </nav>
   <div class="section">
     <div class="container">
       <div class="row">
@@ -28,16 +48,16 @@
           <span class="">
             <div class="form-group">
               <label>Correo</label>
-              <input type="text" class="form-control"  id='user_name' value="" placeholder="Ingrese su user_name o correo registrado">
+              <input type="text" class="form-control"  id='user_name' value="" placeholder="Ingrese su nombre de Usuario o correo registrado">
             </div>
             <div class="form-group">
               <label>Contraseña</label>
-              <input type="password" class="form-control" id='password' value="" placeholder="Ingrese su contraseña registrada" onkeyup='user_logear()'>
+              <input type="password" class="form-control" id='password' value="" placeholder="Ingrese su contraseña registrada" onkeyup='user_logear(event)'>
             </div>
             <!-- <div class="form-group"><a href="register">Soy nuevo</a></div> -->
             <p>¿No tienes cuenta? <a href='#'>Registrarme.</a></p>
             <div class=''>
-              <button type="button" class="btn btn-primary btn-lg" onclick='user_logear()'>Ingresar</button>
+              <button type="button" class="btn btn-primary btn-lg" onclick='user_logear()'><img src="img/gif/loading2.gif" width="28" id='loading' style='display: none;'> Ingresar</button>
             </div>
           </span>
         </div>
@@ -53,13 +73,21 @@
   		$("#menu1 a").removeClass('active');
   		$("#menu1 a[href=login]").addClass('active');
   	});
-    function user_logear(){
+    function user_logear(e){
+      // console.log(e);
+      if(e != undefined) 
+        if(e.keyCode != 13)
+          return;
+      $("#loading").show();
       $.post('/user_logear', {
         user_name: $("#user_name").val()
         ,password: $("#password").val()
       }, function(dt, textStatus, xhr) {
+        $("#loading").hide();
         if(dt)
-          window.location.href="admin";        
+          window.location.href="admin";   
+        else
+          alert("Usuario o Contraseña Incorrecta, intentelo nuevamente");     
       });
     }
   </script>
