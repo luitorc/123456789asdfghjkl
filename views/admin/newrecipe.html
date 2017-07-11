@@ -90,7 +90,7 @@
                                     	<tr>
                                     		<th>OD.</th>
                                             <!-- <td><input type="text" class="form-control" value="" id="esf_od"></td> -->
-                                    		<td>
+                                    		<td style="background-color: #E3FFE7;">
                                                 <div class="form-group input-group">
                                                     <span class="input-group-addon" style='width: 50px;' onclick="$('#esf_od').val('+'); $('#esf_od').focus();">
                                                         <span style='font-size:17px;'><font color='blue'>+</font></span>
@@ -103,20 +103,44 @@
                                                 
                                             </td>
                                             <!-- <td><input type="text" class="form-control" value="" id="cil_od"></td> -->
-                                    		<td>
+                                    		<td style="background-color: #E3FFE7;">
                                                 <div class="form-group input-group">
                                                     <span class="input-group-addon" style="width: 50px;" onclick="$('#cil_od').val('-');$('#cil_od').focus(); "><span style='font-size:17px;'><font color='red'>-</font></span>
                                                     </span>
                                                 </div>
                                                     <input data-list="-5.00,-4.75,-4.50,-4.25,-4.00,-3.75,-3.50,-3.25,-3.00,-2.75,-2.50,-2.25,-2.00,-1.75,-1.50,-1.25,-1.00,-1.75,-1.50,-1.25,-1.00,-0.75,-0.50,-0.25,-0.00" class="dropdown-input-cil-od form-control" id="cil_od" style="width: 100%;"/><button class="dropdown-btn-cil-od" type="button"><span class="caret"></span></button>
                                             </td>
-                                    		<td><input type="text" class="form-control" value="" id="eje_od"></td>
+                                    		<td>
+                                                <i style="color:#9D9D9D;">#Solo números</i><br>    
+                                                <input type="number" class="form-control" value="" id="eje_od">
+                                            </td>
                                     	</tr>
                                     	<tr>
                                     		<th>OI.</th>
-                                    		<td><input type="text" class="form-control" value="" id="esf_oi"></td>
-                                    		<td><input type="text" class="form-control" value="" id="cil_oi"></td>
-                                    		<td><input type="text" class="form-control" value="" id="eje_oi"></td>
+                                    		<td style="background-color: #F7FFD7;">
+                                                <div class="form-group input-group">
+                                                    <span class="input-group-addon" style='width: 50px;' onclick="$('#esf_oi').val('+'); $('#esf_oi').focus();">
+                                                        <span style='font-size:17px;'><font color='blue'>+</font></span>
+                                                    </span>&nbsp;
+                                                    <span class="input-group-addon" style='width: 50px;' onclick="$('#esf_oi').val('-'); $('#esf_oi').focus();">
+                                                        <span style='font-size:17px;'><font color='red'>-</font></span>
+                                                    </span>
+                                                </div>
+                                                    <input data-list="-5.00,-4.75,-4.50,-4.25,-4.00,-3.75,-3.50,-3.25,-3.00,-2.75,-2.50,-2.25,-2.00,-1.75,-1.50,-1.25,-1.00,-1.75,-1.50,-1.25,-1.00,-0.75,-0.50,-0.25,-0.00,+0.00,+0.25,+0.50,+0.75,+1.00,+1.25,+1.50,+1.75,+2.00,+2.25,+2.50,+2.75,+3.00,+3.25,+3.50,+3.75,+4.00,+4.25,+4.50,+4.75,+5.0" class="dropdown-input-esf-oi form-control" width='100%' id="esf_oi"/><button class="dropdown-btn-esf-oi" type="button"><span class="caret"></span></button>
+                                            </td>
+                                    		<td style="background-color: #F7FFD7;">
+                                                <div class="form-group input-group">
+                                                    
+                                                    <span class="input-group-addon" style='width: 50px;' onclick="$('#cil_oi').val('-'); $('#cil_oi').focus();">
+                                                        <span style='font-size:17px;'><font color='red'>-</font></span>
+                                                    </span>
+                                                </div>
+                                                    <input data-list="-5.00,-4.75,-4.50,-4.25,-4.00,-3.75,-3.50,-3.25,-3.00,-2.75,-2.50,-2.25,-2.00,-1.75,-1.50,-1.25,-1.00,-1.75,-1.50,-1.25,-1.00,-0.75,-0.50,-0.25,-0.00" class="dropdown-input-cil-oi form-control" width='100%' id="cil_oi"/><button class="dropdown-btn-cil-oi" type="button"><span class="caret"></span></button>
+
+                                            </td>
+                                    		<td>
+                                                <i style="color:#9D9D9D;">#Solo números</i><br>
+                                            <input type="number" class="form-control" value="" id="eje_oi"></td>
 
                                     	</tr>
                                     </table>
@@ -166,9 +190,9 @@
                                         <label>Lugar de Registro</label>
                                         <select id="optica" class='form-control'>
                                             <option value="Seleccione">Seleccione</option>
-                                            <option value="Innova">Óptica Innova</option>
-                                            <option value="Sun Peru Puerto">Óptica Sun Perú Puerto</option>
-                                            <option value="Sun Peru Pampa">Óptica Sun Perú Pampa</option>
+                                            <option value="INNOVA">ÓPTICA INNOVA</option>
+                                            <option value="ZOOM PERU PUERTO">ÓPTICA ZOOM PERU PUERTO</option>
+                                            <option value="ZOOM PERU PAMPA">ÓPTICA ZOOM PERU PAMPA</option>
                                         </select>
                                         <p class="help-block">En este campo debera seleccionar la optica en donde registro al Paciente</p>
                                     </div>
@@ -186,8 +210,11 @@
 							</div>
 							<br>
                             <div class="row">
-                                <div class="col-lg-12">
-                                	<button type="button" class="btn btn-success btn-lg center-block" id='btn_registrar' onclick="receta_register()">Registrar Receta</button>
+                                <div class="col-lg-12 button-actions" align="center">
+                                    <button type="button" class="btn btn-success btn-lg" id='btn_registrar' onclick="receta_register()">
+                                    <img src="img/gif/loading2.gif" width="40" id='loading' style='display: none;'>
+                                    Registrar Receta</button>
+                                	
                                 </div>
                             </div>
                         </div>
@@ -221,24 +248,6 @@
                 comboplete1.close();
             }
         });
-        $("#esf_od").keyup(function(e) {
-            /* Act on the event */
-            // console.log(this.value.length);
-            console.log(e.keyCode);
-            if(this.value.length == 2 && e.keyCode != 8 )
-                $(this).val( this.value +".");
-                // console.log("entro");
-        
-        });
-
-        $("#cil_od").keyup(function(e) {
-            /* Act on the event */
-            // console.log(this.value.length);
-            if(this.value.length == 2 && e.keyCode != 8 )
-                $(this).val( this.value +".");
-                // console.log("entro");
-        
-        });
         var comboplete2 = new Awesomplete('input.dropdown-input-cil-od', {
             minChars: 0
             ,autoFirst:true
@@ -255,6 +264,50 @@
             else {
                 comboplete2.close();
             }
+        });
+        var comboplete3 = new Awesomplete('input.dropdown-input-esf-oi', {
+            minChars: 0
+            ,autoFirst:true
+            ,sort:false
+        });
+        Awesomplete.$('.dropdown-btn-esf-oi').addEventListener("click", function() {
+            if (comboplete3.ul.childNodes.length === 0) {
+                comboplete3.minChars = 0;
+                comboplete3.evaluate();
+            }
+            else if (comboplete3.ul.hasAttribute('hidden')) {
+                comboplete3.open();
+            }
+            else {
+                comboplete3.close();
+            }
+        });
+        var comboplete4 = new Awesomplete('input.dropdown-input-cil-oi', {
+            minChars: 0
+            ,autoFirst:true
+            ,sort:false
+        });
+        Awesomplete.$('.dropdown-btn-cil-oi').addEventListener("click", function() {
+            if (comboplete4.ul.childNodes.length === 0) {
+                comboplete4.minChars = 0;
+                comboplete4.evaluate();
+            }
+            else if (comboplete4.ul.hasAttribute('hidden')) {
+                comboplete4.open();
+            }
+            else {
+                comboplete4.close();
+            }
+        });
+
+        $("#esf_od").keyup(function(e) {
+            if(this.value.length == 2 && e.keyCode != 8 )
+                $(this).val( this.value +".");        
+        });
+
+        $("#cil_od").keyup(function(e) {
+            if(this.value.length == 2 && e.keyCode != 8 )
+                $(this).val( this.value +".");
         });
     });
         
@@ -338,14 +391,66 @@
                 ,fullname: $("#fullname").val()
                 ,optica: $("#optica").val()
             }
+            var err = verify(obj_in);
+            console.log("Error: "+err);
+            if(err){
+                $("#loading").hide();
+                return;
+            }
+            // console.log("enviado al servidor");
+            // return;
             $.post('/receta_register', obj_in, function(id_receta, textStatus, xhr) {
-                console.log(id_receta);
+                $("#loading").hide();
                 if(id_receta){
                     clearInputs();
                     window.location.href='admin_patientRecord?idp='+obj_in.id_paciente;
                     
                 }
             });
+        }
+        function verify(obj_in){
+            console.log("-------------------------------------------------");
+            console.log("Resultado de verificación");
+            var err = false;
+            var med = false;
+            for(i in obj_in){
+                $("#"+i).css('background','');
+                //Verificación de Campos vacios
+                if(obj_in[i] == "" || obj_in[i] == 0 || obj_in[i] == 'Seleccione' ){
+
+                    
+
+                    //exeptions - No obigatorios
+                    if( i == 'recomendaciones' || i=='producto' || i=='esf_od' || i=='cil_od' || i=='esf_oi' || i=='cil_oi' || i=='id_receta' )
+                        continue;
+                    console.log("[*obligatorio]>> "+i);
+                    err =true;
+                    $("#"+i).css('background','#FFDEDE');
+                }
+            }
+            console.log("err: "+err);
+            //Medida -- Si todos las medidas estan en blanco, automaticamente se ponen en 0.00
+            if( $("#esf_od").val() != "" || $("#cil_od").val() != "" ){
+                err=true;
+                //par completado
+                if( $("#esf_od").val() != "" && $("#cil_od").val() != "" )
+                    err=false;
+                if($("#esf_od").val() == "")    
+                    $("#esf_od").css("background","#F7B2B2");
+                if($("#cil_od").val() == "")
+                    $("#cil_od").css("background","#F7B2B2");
+            }
+            if( $("#esf_oi").val() != "" || $("#cil_oi").val() != "" ){
+                err=true;
+                //par completado
+                if( $("#esf_oi").val() != "" && $("#cil_oi").val() != "" )
+                    err=false;
+                if($("#esf_oi").val() == "")    
+                    $("#esf_oi").css("background","#F7B2B2");
+                if($("#cil_oi").val() == "")
+                    $("#cil_oi").css("background","#F7B2B2");
+            }
+            return err;
         }
         function clearInputs(){
             $("input,textarea").val("");
@@ -375,6 +480,9 @@
                 $("#id_paciente").html(idp);
                 $("#fullname").val(fullname);
                 $("#edad").val(patients[idp].yearold);
+                $(".button-actions").append(
+                    "<a href=\"admin_patientRecord?idp="+idp+"\" target='_blank' class='btn btn-primary btn-lg' style='' role='button'>Ver ultimas recetas</a>"
+                );
             }catch(ex){
                 console.log(ex);
             }

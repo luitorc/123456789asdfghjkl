@@ -113,21 +113,14 @@
         function publish_register(){
             $("#loading").show();
             if( ltdata_img != "null" ){
-                $.ajax({ 
-                    // url: 'http://127.0.0.1:1800/helper_g.php',
-                    url: '//ilored.com/helper_g.php',
-                    // url: 'http://ilored.com/helper_g.php',
-                    cache: false,
-                    type : "POST",            
-                    data: {
-                        btn:'savefile64'
-                        ,ltdata: ltdata_img
-                        ,name: "opticainnova/"+name
-                    },
-                    // dataType: 'json',
-                    success: function(fileName)
-                    {
-                        console.log(fileName); 
+                // $.post('//ilored.com/helper_g.php', {
+                $.post('//127.0.0.1:1800/helper_g.php', {
+                    btn:'savefile64'
+                    ,name1: "opticainnova/"+name
+                    ,ltdata: ltdata_img
+                }, function(fileName, textStatus, xhr) {
+                    /*optional stuff to do after success */
+                    console.log(fileName); 
                         //Enviamos datos 
                         $.post('/publish_register', {
                             titulo: $("#titulo").val()
@@ -137,10 +130,37 @@
                             $("#loading").hide();
                             console.log(dt);
                             alert("Publicación Realizada con exito");
-                            window.location.href='admin';
+                            // window.location.href='admin';
                         });
-                    }            
                 });
+                // $.ajax({ 
+                //     // url: 'http://127.0.0.1:1800/helper_g.php',
+                //     url: '//ilored.com/helper_g.php',
+                //     type : "POST",            
+                //     // dataType: 'jsonp',
+                //     // jsonp: 'jsonp_callback',
+                //     data:"btn=savefile64&name1=opticainnova/"+name+"&ltdata="+ltdata_img,
+                //     // data: {
+                //     //     btn:'savefile64'
+                //     //     ,ltdata: ltdata_img
+                //     //     ,name1: "opticainnova/"+name
+                //     // },
+                //     success: function(fileName)
+                //     {
+                //         console.log(fileName); 
+                //         //Enviamos datos 
+                //         $.post('/publish_register', {
+                //             titulo: $("#titulo").val()
+                //             ,descripcion: $("#descripcion").val()
+                //             ,fileName: fileName
+                //         }, function(dt, textStatus, xhr) {
+                //             $("#loading").hide();
+                //             console.log(dt);
+                //             alert("Publicación Realizada con exito");
+                //             // window.location.href='admin';
+                //         });
+                //     }            
+                // });
             }else{
                 $.post('/publish_register', {
                     titulo: $("#titulo").val()
