@@ -24,9 +24,9 @@
         app.set('view options', { layout: false });
         app.set('views', __dirname + '/views');
 
-        app.use(bodyParser.json({limit: '10mb'})); // support json encoded bodies
+        app.use(bodyParser.json({limit: '50mb'})); // support json encoded bodies
         // app.use(bodyParser.json({limit: '28byte'})); // support json encoded bodies
-        app.use(bodyParser.urlencoded({ extended: true ,limit: '10mb'})); // support encoded bodies
+        app.use(bodyParser.urlencoded({ extended: true ,limit: '50mb'})); // support encoded bodies
         app.use(express.bodyParser());
         app.use(express.methodOverride());
         app.use(express.cookieParser('token'));
