@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-8">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <%=edit==true?"Actualización de datos del paciente":"Registro de Paciente"%>
@@ -79,9 +79,9 @@
                                         <label>Lugar de Registro</label>
                                         <select id="optica" class='form-control'>
                                             <option value="Seleccione">Seleccione</option>
-                                            <option value="Innova">Optica Innova</option>
-                                            <option value="Sun Peru Puerto">Optica Sun Perú Puerto</option>
-                                            <option value="Sun Peru Pampa">Optica Sun Perú Pampa</option>
+                                            <option value="INNOVA">OPTICA INNOVA</option>
+                                            <option value="ZOOM PERU PUERTO">OPTICA ZOOM PERU PUERTO</option>
+                                            <option value="ZOOM PERU PAMPA">OPTICA ZOOM PERU PAMPA</option>
                                         </select>
                                         <p class="help-block">En este campo debera seleccionar la optica en donde registro al Paciente</p>
                                     </div>
@@ -121,6 +121,7 @@
             paciente_getlist();
         <%}%>
 
+        $("#fullname").focus();
     });
     function paciente_verifyXfullname(callback){
         $.post('/paciente_verifyXfullname', {
@@ -144,6 +145,9 @@
             }
             awesomplete.list = listAll;
             awesomplete.autoFirst = true;
+
+            // $("#fullname").css('width','400px');
+            $("#fullname").focus();
         });
     }
     function awesomplete_select(){

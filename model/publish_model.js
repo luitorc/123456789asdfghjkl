@@ -23,7 +23,7 @@ exports.get = function(req, res, next){
 }
 exports.register = function(req, res, next){
 	var body = req.body;
-
+	req.session.id_user = 1;
 	db.connect(function(err, client, done) {
 
 		if(err) return console.error('error fetching client from pool', err);

@@ -15,6 +15,7 @@
     <link href="lib/sb-admin-2/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
     <link href="lib/sb-admin-2/dist/css/sb-admin-2.css" rel="stylesheet">
     <link href="lib/sb-admin-2/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="lib/awesomplete-gh-pages/awesomplete.css">
     <script src="js/luitor.js"></script>
 </head>
 
@@ -29,8 +30,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <ol class="breadcrumb">
-                          <li><a href="#">Sitio Web</a></li>
-                          <li class="active">Publicación</li>
+                          <!-- <li><a href="#">Inicio</a></li> -->
+                          <li class="active">Buscador</li>
                         </ol>
                     </div>
                 </div>
@@ -40,39 +41,45 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Formulario de Publicación
+                        Buscador de Pacientes
                         <div class="pull-right">
-                                <div class="btn-group">
-                                    <a href='/' target="_blank" class="btn btn-default btn-xs dropdown-toggle">
-                                        Visualizar Sitio Web
-                                    </a>
-                                </div>
-                            </div>
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <span class="form">
-                                    <div class="form-group">
-                                        <label>Titulo</label>
-                                        <input class="form-control" placeholder="Titulo de Publicación" id='titulo'>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Imagen de Publicación</label>
-                                        <input type="file" id='imgp' onchange='addImg();'>
-                                        <div id='imgp_base' width='400'>
-                                            <img src="" id='demo_img' width='400'>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Texto de Publicación</label>
-                                        <textarea class="form-control" rows="3" placeholder="" id='descripcion'></textarea>
-                                    </div>
-                                    <button class="btn btn-success" onclick='publish_register()'>
-                                    <img src="img/gif/loading2.gif" width="40" id='loading' style='display: none;'> Publicar</button>
-                                </span>
+                            <div class="btn-group">
+                                <a href='/admin_mypatients' class="btn btn-default btn-xs dropdown-toggle">
+                                    Visualizar todos los Pacientes
+                                </a>
                             </div>
                         </div>
+                    </div>
+                    <div class="panel-body">
+
+                        <div class="row">
+                            <div class="col-lg-12" align="center">
+                                <img src="https://definicion.mx/wp-content/uploads/2014/02/buscador.jpg" width="100px">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    
+                                    <label style="color:#848484;">Ingrese Nombres del paciente: </label>
+                                    <input type="text" class="form-control" style='padding: 25px;' placeholder="Buscador de Pacientes" id="search_patient" class='awesomplete'>
+                                   
+                                    <!-- <span class="input-group-btn" style='margin: 25px;'>
+                                        <button class="btn btn-default" type="button"><i class="fa fa-search" style="padding: 12px;"></i>
+                                        </button>
+                                    </span> -->
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
                     </div>
                 </div>
             </div>
@@ -82,100 +89,48 @@
     <script src="lib/sb-admin-2/vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="lib/sb-admin-2/vendor/metisMenu/metisMenu.min.js"></script>
     <script src="lib/sb-admin-2/dist/js/sb-admin-2.js"></script>
+    <script src="js/luitor.js"></script>
+    <script src="lib/awesomplete-gh-pages/awesomplete.js"></script>
+
     <script>
         $(document).ready(function() {
-            
+            paciente_getlist();
         });
-        var ltdata_img = "null";
-        var name = "";
-        function addImg(){
-            var fullPath = document.getElementById('imgp').value;
-            //Get FileName
-            if (fullPath) {
-                var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
-                var filename = fullPath.substring(startIndex);
-                if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
-                    filename = filename.substring(1);
+        var listAll;
+        var listAll_cod;
+        function paciente_getlist(){
+            listAll = [];
+            listAll_cod = [];
+            $.post('/paciente_getlist', {
+            }, function(dt, textStatus, xhr) {
+                console.log(dt);
+                var input = document.getElementById("search_patient");
+                awesomplete = new Awesomplete(input);
+                for(i in dt){
+                    listAll.push(dt[i].fullname);
+                    listAll_cod.push(dt[i].id_paciente);
                 }
-                // alert(filename);
-                name = filename.split(".")[0];
-            }
-            $l.fileTob64('imgp',function(info, data64){
-                ltdata_img = info+","+data64;
-                // console.log(info);
-                // name = "Luchito";
-                $("#demo_img").attr("src",ltdata_img);
-                // $("#imgp_base").html("<img src='../public/img/viewFile.png' style='cursor:pointer;' width='25'>");
-
+                awesomplete.list = listAll;
+                awesomplete.autoFirst = true;
+                // console.log(listAll);
+                // $("#search_patient").css('width','400px');
+                // console.log("entro");
+                $("#search_patient").focus();
             });
-
         }
-        function publish_register(){
-            $("#loading").show();
-            if( ltdata_img != "null" ){
-                $.post('//ilored.com/helper_g.php', {
-                // $.post('//127.0.0.1:1800/helper_g.php', {
-                    btn:'savefile64'
-                    ,name1: "opticainnova/"+name
-                    ,ltdata: ltdata_img
-                }, function(fileName, textStatus, xhr) {
-                    /*optional stuff to do after success */
-                    console.log(fileName); 
-                        //Enviamos datos 
-                        $.post('/publish_register', {
-                            titulo: $("#titulo").val()
-                            ,descripcion: $("#descripcion").val()
-                            ,fileName: fileName
-                        }, function(dt, textStatus, xhr) {
-                            $("#loading").hide();
-                            console.log(dt);
-                            alert("Publicación Realizada con exito");
-                            window.location.href='admin';
-                        });
-                });
-                // $.ajax({ 
-                //     // url: 'http://127.0.0.1:1800/helper_g.php',
-                //     url: '//ilored.com/helper_g.php',
-                //     type : "POST",            
-                //     // dataType: 'jsonp',
-                //     // jsonp: 'jsonp_callback',
-                //     data:"btn=savefile64&name1=opticainnova/"+name+"&ltdata="+ltdata_img,
-                //     // data: {
-                //     //     btn:'savefile64'
-                //     //     ,ltdata: ltdata_img
-                //     //     ,name1: "opticainnova/"+name
-                //     // },
-                //     success: function(fileName)
-                //     {
-                //         console.log(fileName); 
-                //         //Enviamos datos 
-                //         $.post('/publish_register', {
-                //             titulo: $("#titulo").val()
-                //             ,descripcion: $("#descripcion").val()
-                //             ,fileName: fileName
-                //         }, function(dt, textStatus, xhr) {
-                //             $("#loading").hide();
-                //             console.log(dt);
-                //             alert("Publicación Realizada con exito");
-                //             // window.location.href='admin';
-                //         });
-                //     }            
-                // });
-            }else{
-                $.post('/publish_register', {
-                    titulo: $("#titulo").val()
-                    ,descripcion: $("#descripcion").val()
-                    ,fileName: fileName
-                }, function(dt, textStatus, xhr) {
-                    $("#loading").hide();
-                    console.log(dt);
-                    alert("Publicación Realizada con exito");
-                    window.location.href='admin';
-                });
+        function awesomplete_select(){
+            var item = $("#search_patient").val();
+            var exist = false;
+            var idp = 0;
+            for( i in listAll ){
+                if( listAll[i] == item ){
+                    exist = true;
+                    idp = listAll_cod[i];
+
+                }
             }
+            window.location.href='admin_patientRecord?idp='+idp;
         }
-
     </script>
-
 </body>
 </html>

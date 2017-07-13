@@ -28,7 +28,7 @@ exports.getlistXpatient = function(req, res, next){
 
 	db.connect(function(err, client, done) {
 		if(err) return console.error('error fetching client from pool', err);
-		var sql = `SELECT * FROM receta WHERE id_paciente = '${body.id_paciente}' ORDER BY id_receta DESC`;
+		var sql = `SELECT * FROM receta WHERE id_paciente = '${body.id_paciente}' ORDER BY timestamp_aux DESC`;
 // var sql = `SELECT * FROM receta AS rec 
 // INNER JOIN paciente AS pac ON rec.id_paciente = pac.id_paciente
 // WHERE pac.id_paciente = '${body.id_paciente}'`;

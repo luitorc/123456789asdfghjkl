@@ -29,6 +29,9 @@
         .input-group-addon{
             cursor: pointer;
         }
+        body .panel-body input{
+            font-size:20px;
+        }
 	</style>
     </head>
 <body>
@@ -50,10 +53,10 @@
                 </div>
             </div>
             <div class="row" id='search_patient_row'>
-                <div class="col-lg-12">
-					<div class="input-group custom-search-form" >
-                        <input type="text" class="awesomplete" placeholder="Busqueda de Paciente" id='search_patient'
-                        style="width: 300px;padding: 8px;border-radius: 4px;">
+                <div class="col-lg-8">
+					<div class="custom-search-form" >
+                        <input type="text" class="form-control awesomplete" placeholder="Busqueda de Paciente" id='search_patient'
+                        style="">
                         <!-- <span class="input-group-btn">
                             <button class="btn btn-default" type="button">
                                 <i class="fa fa-search"></i>
@@ -64,7 +67,7 @@
             </div>
             <br>
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-8">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <%=idr!=0?"Actualización de Receta":"Registro de Receta" %>
@@ -77,20 +80,21 @@
                                         <input class="form-control" id='id_receta' value='<%=idr%>' disabled>
                                     </div>
                                     <div class="form-group">
-                                        <label>Paciente <span style='color:#4066D3;'>#<span id='id_paciente'><%=idp%></span></span></label>
+                                        <label onclick="$('#search_patient').focus();" style="cursor:pointer;">Paciente <span style='color:#4066D3;'>#<span id='id_paciente'><%=idp%></span></span></label>
                                         <input class="form-control" id='fullname' value='<%=fullname%>' disabled>
                                     </div>
                                     <table class='table receta' border="1" style='border:5px #F2F2F2 solid;'>
                                     	<tr>
+                                            <td></td>
+                                            <th>Esf.</th>
                                     		<td></td>
-                                    		<th>Esf.</th>
                                     		<th>Cil.</th>
                                     		<th>Eje.</th>
                                     	</tr>
                                     	<tr>
                                     		<th>OD.</th>
                                             <!-- <td><input type="text" class="form-control" value="" id="esf_od"></td> -->
-                                    		<td style="background-color: #E3FFE7;">
+                                    		<td style="background-color: #EDFFF0;">
                                                 <div class="form-group input-group">
                                                     <span class="input-group-addon" style='width: 50px;' onclick="$('#esf_od').val('+'); $('#esf_od').focus();">
                                                         <span style='font-size:17px;'><font color='blue'>+</font></span>
@@ -102,6 +106,7 @@
                                                     <input data-list="-5.00,-4.75,-4.50,-4.25,-4.00,-3.75,-3.50,-3.25,-3.00,-2.75,-2.50,-2.25,-2.00,-1.75,-1.50,-1.25,-1.00,-1.75,-1.50,-1.25,-1.00,-0.75,-0.50,-0.25,-0.00,+0.00,+0.25,+0.50,+0.75,+1.00,+1.25,+1.50,+1.75,+2.00,+2.25,+2.50,+2.75,+3.00,+3.25,+3.50,+3.75,+4.00,+4.25,+4.50,+4.75,+5.0" class="dropdown-input-esf-od form-control" width='100%' id="esf_od"/><button class="dropdown-btn-esf-od" type="button"><span class="caret"></span></button>
                                                 
                                             </td>
+                                            <td></td>
                                             <!-- <td><input type="text" class="form-control" value="" id="cil_od"></td> -->
                                     		<td style="background-color: #E3FFE7;">
                                                 <div class="form-group input-group">
@@ -110,14 +115,17 @@
                                                 </div>
                                                     <input data-list="-5.00,-4.75,-4.50,-4.25,-4.00,-3.75,-3.50,-3.25,-3.00,-2.75,-2.50,-2.25,-2.00,-1.75,-1.50,-1.25,-1.00,-1.75,-1.50,-1.25,-1.00,-0.75,-0.50,-0.25,-0.00" class="dropdown-input-cil-od form-control" id="cil_od" style="width: 100%;"/><button class="dropdown-btn-cil-od" type="button"><span class="caret"></span></button>
                                             </td>
-                                    		<td>
-                                                <i style="color:#9D9D9D;">#Solo números</i><br>    
+                                    		<td style="background-color: #E3FFE7;">
+                                                <div class="form-group input-group">
+                                                    <span class="input-group-addon" style="width: 50px;" onclick="$('#eje_od').focus();"><span style="font-size:17px;"><font color='gray'>Escala</font></span>
+                                                    </span>
+                                                </div>
                                                 <input type="number" class="form-control" value="" id="eje_od">
                                             </td>
                                     	</tr>
                                     	<tr>
                                     		<th>OI.</th>
-                                    		<td style="background-color: #F7FFD7;">
+                                    		<td style="background-color: #F9FEE6;">
                                                 <div class="form-group input-group">
                                                     <span class="input-group-addon" style='width: 50px;' onclick="$('#esf_oi').val('+'); $('#esf_oi').focus();">
                                                         <span style='font-size:17px;'><font color='blue'>+</font></span>
@@ -128,6 +136,7 @@
                                                 </div>
                                                     <input data-list="-5.00,-4.75,-4.50,-4.25,-4.00,-3.75,-3.50,-3.25,-3.00,-2.75,-2.50,-2.25,-2.00,-1.75,-1.50,-1.25,-1.00,-1.75,-1.50,-1.25,-1.00,-0.75,-0.50,-0.25,-0.00,+0.00,+0.25,+0.50,+0.75,+1.00,+1.25,+1.50,+1.75,+2.00,+2.25,+2.50,+2.75,+3.00,+3.25,+3.50,+3.75,+4.00,+4.25,+4.50,+4.75,+5.0" class="dropdown-input-esf-oi form-control" width='100%' id="esf_oi"/><button class="dropdown-btn-esf-oi" type="button"><span class="caret"></span></button>
                                             </td>
+                                            <td>&nbsp;&nbsp;</td>
                                     		<td style="background-color: #F7FFD7;">
                                                 <div class="form-group input-group">
                                                     
@@ -138,8 +147,11 @@
                                                     <input data-list="-5.00,-4.75,-4.50,-4.25,-4.00,-3.75,-3.50,-3.25,-3.00,-2.75,-2.50,-2.25,-2.00,-1.75,-1.50,-1.25,-1.00,-1.75,-1.50,-1.25,-1.00,-0.75,-0.50,-0.25,-0.00" class="dropdown-input-cil-oi form-control" width='100%' id="cil_oi"/><button class="dropdown-btn-cil-oi" type="button"><span class="caret"></span></button>
 
                                             </td>
-                                    		<td>
-                                                <i style="color:#9D9D9D;">#Solo números</i><br>
+                                    		<td style="background-color: #F7FFD7;">
+                                                <div class="form-group input-group">
+                                                    <span class="input-group-addon" style="width: 50px;" onclick="$('#eje_oi').focus();"><span style="font-size:17px;"><font color='gray'>Escala</font></span>
+                                                    </span>
+                                                </div>
                                             <input type="number" class="form-control" value="" id="eje_oi"></td>
 
                                     	</tr>
@@ -152,12 +164,21 @@
                                     	</tr>
                                     	<tr>
 
-                                    		<td><input type="text" class="form-control" value="" id="add"></td>
+                                    		<td>
+                                                <div class="form-group input-group">
+                                                        
+                                                        <span class="input-group-addon" style='width: 50px;' onclick="$('#add').val('+'); $('#add').focus();">
+                                                            <span style='font-size:12px;'><font color='blue'>+</font></span>
+                                                        </span>
+                                                    </div>
+                                                <input data-list="+0.25,+0.50,+0.75,+1.00,+1.25,+1.50,+1.75,+2.00,+2.25,+2.50,+2.75,+3.00,+3.25,+3.50,+3.75,+4.00,+4.25,+4.50" class="dropdown-input-add form-control" width='100%' id="add"/><button class="dropdown-btn-add" type="button"><span class="caret"></span></button>
+                                                <!-- <input type="text" class="form-control" value="" id="add"> -->
+                                            </td>
 
-                                    		<td><input type="text" class="form-control" value="" id="dip1"></td>
-                                    		<td><input type="text" class="form-control" value="" id="dip2"></td>
-                                    		<td><input type="text" class="form-control" value="" id="edad"></td>
-                                    		<th>años</th>
+                                    		<td><br><br><input type="text" class="form-control" value="" id="dip1"></td>
+                                    		<td><br><br><input type="text" class="form-control" value="" id="dip2"></td>
+                                    		<td><br><br><input type="text" class="form-control" value="" id="edad"></td>
+                                    		<th><br><br>años</th>
                                     	</tr>
                                     </table>
 
@@ -165,15 +186,28 @@
                                 </div>
                             </div>
 							<div class="row">
-								<div class="col-lg-1">
+								<div class="col-lg-2">
+                                    <br>
+                                    <br>
 									<label>Producto: </label>
 								</div>
-								<div class="col-lg-7">
+								<div class="col-lg-10">
+                                    <div class="form-group input-group">
+                                        <span class="input-group-addon" style="width: 50px;" onclick="$('#producto').val('MONOFOCAL ');$('#producto').focus();"><span style="font-size:14px;"><font color='gray'>MONOFOCAL</font></span>
+                                        </span>
+                                        <span class="input-group-addon" style="width: 50px;" onclick="$('#producto').val('BIFOCAL ');$('#producto').focus();"><span style="font-size:14px;"><font color='gray'>BIFOCAL</font></span>
+                                        </span>
+                                        <span class="input-group-addon" style="width: 50px;" onclick="$('#producto').val('MULTIFOCAL ');$('#producto').focus();"><span style="font-size:14px;"><font color='gray'>MULTIFOCAL</font></span>
+                                        </span>
+                                    </div>
 									<input type="text" class="form-control" id="producto">
 								</div>
-								<div class="col-lg-2" align="" ><label>Precio: </label> S/.</div>
-								<div class="col-lg-2"><input type="text" class="form-control" value=""  id="precio"></div>
 							</div>
+                            <br>
+                            <div class="row">
+                                <div class="col-lg-2"><label>Precio: </label> S/.</div>
+                                <div class="col-lg-2"><input type="text" class="form-control" value=""  id="precio" placeholder="00.00"></div>
+                            </div>
                             <br>
                             <div class="row">
                                 <div class="col-lg-12">
@@ -204,16 +238,17 @@
 								<div class="col-lg-1">
 									<label>Fecha: </label>
 								</div>
-								<div class="col-lg-3">
+								<div class="col-lg-4">
 									<input type="date" class="form-control" value="" id="timestamp_aux">
 								</div>
 							</div>
 							<br>
                             <div class="row">
-                                <div class="col-lg-12 button-actions" align="center">
+                                <div class="col-lg-12" align="center">
                                     <button type="button" class="btn btn-success btn-lg" id='btn_registrar' onclick="receta_register()">
                                     <img src="img/gif/loading2.gif" width="40" id='loading' style='display: none;'>
                                     Registrar Receta</button>
+                                    <span class='button-actions'></span>
                                 	
                                 </div>
                             </div>
@@ -299,6 +334,23 @@
                 comboplete4.close();
             }
         });
+        var comboplete5 = new Awesomplete('input.dropdown-input-add', {
+            minChars: 0
+            ,autoFirst:true
+            ,sort:false
+        });
+        Awesomplete.$('.dropdown-btn-add').addEventListener("click", function() {
+            if (comboplete5.ul.childNodes.length === 0) {
+                comboplete5.minChars = 0;
+                comboplete5.evaluate();
+            }
+            else if (comboplete5.ul.hasAttribute('hidden')) {
+                comboplete5.open();
+            }
+            else {
+                comboplete5.close();
+            }
+        });
 
         $("#esf_od").keyup(function(e) {
             if(this.value.length == 2 && e.keyCode != 8 )
@@ -306,6 +358,20 @@
         });
 
         $("#cil_od").keyup(function(e) {
+            if(this.value.length == 2 && e.keyCode != 8 )
+                $(this).val( this.value +".");
+        });
+        $("#esf_oi").keyup(function(e) {
+            if(this.value.length == 2 && e.keyCode != 8 )
+                $(this).val( this.value +".");        
+        });
+
+        $("#cil_oi").keyup(function(e) {
+            if(this.value.length == 2 && e.keyCode != 8 )
+                $(this).val( this.value +".");
+        });
+        $("#add").keyup(function(e) {
+            console.log("asa");
             if(this.value.length == 2 && e.keyCode != 8 )
                 $(this).val( this.value +".");
         });
@@ -375,10 +441,10 @@
                 ,cil_oi: $("#cil_oi").val()
                 ,eje_od: $("#eje_od").val()
                 ,eje_oi: $("#eje_oi").val()
-                ,prisma_od: $("#prisma_od").val()
-                ,prisma_oi: $("#prisma_oi").val()
-                ,av_od: $("#av_od").val()
-                ,av_oi: $("#av_oi").val()
+                // ,prisma_od: $("#prisma_od").val()
+                // ,prisma_oi: $("#prisma_oi").val()
+                // ,av_od: $("#av_od").val()
+                // ,av_oi: $("#av_oi").val()
                 ,add: $("#add").val()
                 ,dip1: $("#dip1").val()
                 ,dip2: $("#dip2").val()
@@ -397,7 +463,8 @@
                 $("#loading").hide();
                 return;
             }
-            // console.log("enviado al servidor");
+            // alert($("#optica").val());
+            console.log("enviando al servidor");
             // return;
             $.post('/receta_register', obj_in, function(id_receta, textStatus, xhr) {
                 $("#loading").hide();
@@ -416,39 +483,46 @@
             for(i in obj_in){
                 $("#"+i).css('background','');
                 //Verificación de Campos vacios
-                if(obj_in[i] == "" || obj_in[i] == 0 || obj_in[i] == 'Seleccione' ){
+                if(obj_in[i] == null || obj_in[i] == "" || obj_in[i] == 0 || obj_in[i] == 'Seleccione' ){
 
                     
 
                     //exeptions - No obigatorios
-                    if( i == 'recomendaciones' || i=='producto' || i=='esf_od' || i=='cil_od' || i=='esf_oi' || i=='cil_oi' || i=='id_receta' )
+                    if( i == 'recomendaciones' || i=='producto' 
+                        || i=='esf_od' || i=='cil_od' || i=='esf_oi' || i=='cil_oi' 
+                        || i=='id_receta' || i=='eje_od' || i=='eje_oi'
+                        || i=='add' || i=='dip2' || i=='edad' || i=='timestamp_aux' || i=='precio' )
                         continue;
                     console.log("[*obligatorio]>> "+i);
                     err =true;
-                    $("#"+i).css('background','#FFDEDE');
+                    $("#"+i).css('background','#FFDEDE').focus();
                 }
             }
             console.log("err: "+err);
             //Medida -- Si todos las medidas estan en blanco, automaticamente se ponen en 0.00
-            if( $("#esf_od").val() != "" || $("#cil_od").val() != "" ){
+            if(err)
+                return err;
+            if( $("#eje_od").val() != "" || $("#cil_od").val() != "" ){
                 err=true;
                 //par completado
-                if( $("#esf_od").val() != "" && $("#cil_od").val() != "" )
+                if( $("#eje_od").val() != "" && $("#cil_od").val() != "" )
                     err=false;
-                if($("#esf_od").val() == "")    
-                    $("#esf_od").css("background","#F7B2B2");
+                if($("#eje_od").val() == "")
+                    $("#eje_od").css("background","#F7B2B2").focus();
                 if($("#cil_od").val() == "")
-                    $("#cil_od").css("background","#F7B2B2");
+                    $("#cil_od").css("background","#F7B2B2").focus();
             }
-            if( $("#esf_oi").val() != "" || $("#cil_oi").val() != "" ){
+            if(err)
+                return err;
+            if( $("#eje_oi").val() != "" || $("#cil_oi").val() != "" ){
                 err=true;
                 //par completado
-                if( $("#esf_oi").val() != "" && $("#cil_oi").val() != "" )
+                if( $("#eje_oi").val() != "" && $("#cil_oi").val() != "" )
                     err=false;
-                if($("#esf_oi").val() == "")    
-                    $("#esf_oi").css("background","#F7B2B2");
+                if($("#eje_oi").val() == "")    
+                    $("#eje_oi").css("background","#F7B2B2").focus();
                 if($("#cil_oi").val() == "")
-                    $("#cil_oi").css("background","#F7B2B2");
+                    $("#cil_oi").css("background","#F7B2B2").focus();
             }
             return err;
         }
@@ -480,7 +554,7 @@
                 $("#id_paciente").html(idp);
                 $("#fullname").val(fullname);
                 $("#edad").val(patients[idp].yearold);
-                $(".button-actions").append(
+                $(".button-actions").html(
                     "<a href=\"admin_patientRecord?idp="+idp+"\" target='_blank' class='btn btn-primary btn-lg' style='' role='button'>Ver ultimas recetas</a>"
                 );
             }catch(ex){

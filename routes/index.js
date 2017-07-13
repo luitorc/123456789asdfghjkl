@@ -1,4 +1,10 @@
 
+exports.admin_publish = function(req, res){
+	var params = {
+		title: "Publicación"
+	};
+	res.render('admin/publish', params);
+}
 exports.admin_patientRecord = function(req, res){
 	var params = {
 		title: "Expediente del Paciente"
