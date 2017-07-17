@@ -1,0 +1,12 @@
+diff a/views/admin/publish.html b/views/admin/publish.html	(rejected hunks)
+@@ -113,8 +113,8 @@
+         function publish_register(){
+             $("#loading").show();
+             if( ltdata_img != "null" ){
+-                // $.post('//ilored.com/helper_g.php', {
+-                $.post('//127.0.0.1:1800/helper_g.php', {
++                $.post('//ilored.com/helper_g.php', {
++                // $.post('//127.0.0.1:1800/helper_g.php', {
+                     btn:'savefile64'
+                     ,name1: "opticainnova/"+name
+                     ,ltdata: ltdata_img
