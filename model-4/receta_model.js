@@ -79,14 +79,14 @@ exports.register = function(req, res, next){
 				   SET esf_od='${body.esf_od}', esf_oi='${body.esf_oi}', cil_od='${body.cil_od}', cil_oi='${body.cil_oi}', eje_od='${body.eje_od}', 
 				       eje_oi='${body.eje_oi}', add='${body.add}', 
 				       dip1='${body.dip1}', dip2='${body.dip2}', edad='${body.edad}', recomendaciones='${body.recomendaciones}', producto='${body.producto}', precio='${body.precio}', 
-				       timestamp_aux='${body.timestamp_aux}', id_paciente='${body.id_paciente}', fullname='${body.fullname}', optica='${body.optica}', id_user_update='${req.session.id_user}', update_date='${body.timestamp_aux}'
+				       timestamp_aux='${body.timestamp_aux}', id_paciente='${body.id_paciente}', fullname='${body.fullname}', optica='${body.optica}'
 				 WHERE id_receta='${body.id_receta}';`;	
 		}else{
 			sql = `INSERT INTO receta(esf_od, esf_oi, cil_od, cil_oi, eje_od, eje_oi, add, dip1, dip2, edad, recomendaciones, 
-	            producto, precio, timestamp_aux, id_paciente,fullname,optica,id_user)
+	            producto, precio, timestamp_aux, id_paciente,fullname,optica)
 	   		 VALUES ('${body.esf_od}', '${body.esf_oi}', '${body.cil_od}', '${body.cil_oi}', '${body.eje_od}', '${body.eje_oi}'
 	           , '${body.add}', '${body.dip1}', '${body.dip2}', '${body.edad}', '${body.recomendaciones}', 
-	            '${body.producto}', '${body.precio}', '${body.timestamp_aux}', '${body.id_paciente}','${body.fullname}','${body.optica}','${req.session.id_user}') RETURNING id_receta;
+	            '${body.producto}', '${body.precio}', '${body.timestamp_aux}', '${body.id_paciente}','${body.fullname}','${body.optica}') RETURNING id_receta;
 			`;
 		}
 		console.log(sql);

@@ -12,12 +12,12 @@ menu = function(){
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="admin"><span style='color:#EA2626;font-weight: bold;'>ADMIN</span> / OPTICA</a>
+                <a class="navbar-brand" href="index.html"><span style='color:#7390FD;font-weight: bold;'>USER</span> - DIRECTORIO INMIGRANTE</a>
             </div>
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown" style='display: none;'>
+                <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
@@ -68,7 +68,7 @@ menu = function(){
                     <!-- /.dropdown-messages -->
                 </li>
                 <!-- /.dropdown -->
-                <li class="dropdown" style='display: none;'>
+                <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
@@ -147,7 +147,7 @@ menu = function(){
                     <!-- /.dropdown-tasks -->
                 </li>
                 <!-- /.dropdown -->
-                <li class="dropdown" style='display: none;'>
+                <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
@@ -208,11 +208,8 @@ menu = function(){
                 </li>
                 <!-- /.dropdown -->
                 <li class="dropdown">
-                    <p class='glyphicon glyphicon-log-out' style='color:red;padding: 15px 50px 0px 15px;cursor:pointer;' onclick=\"window.location.href='/'\"> Salir</p>
-                </li>
-                <li class="dropdown" style='display: none;'>
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw" style='color: #4EA93C;'></i> <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
@@ -232,55 +229,92 @@ menu = function(){
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li class="sidebar-search" >
-                            
-                            <div style='color:#2F43A9;font-weight: bold;'>Panel de control</div>
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="admin" class="active"><i class="glyphicon glyphicon-search"></i> Buscador</a>
+                            <a href="user"><i class="fa fa-dashboard fa-fw"></i> Inicio</a>
+                        </li>
+                        <li>
+                            <a href="user"><i class="fa fa-user fa-fw"></i> Mi perfil
+                            <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="user_mydata">Mi datos</a>
+                                </li>
+                                <li>
+                                    <a href="#">Mi CV</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li >
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i> Bolsa de trabajo
+                            <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="user_register_cv">Publicar</a>
+                                </li>
+                                <li>
+                                    <a href="user_mypublications">Mis Publicaciones</a>
+								</li>
+                            </ul>
                         </li>
                         <li style='display: none;'>
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i> Clientes<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="admin_registerp">Paciente</a>
+                                    <a href="flot.html">Flot Charts</a>
                                 </li>
                                 <li>
-                                    <a href="admin_newrecipe">Receta</a>
-                                </li>
-                                <li>
-                                    <a href="admin_mypatients">Mis Pacientes</a>
+                                    <a href="morris.html">Morris.js Charts</a>
                                 </li>
                             </ul>
+                            <!-- /.nav-second-level -->
                         </li>
-                        <li>
-                            <a href="#"><i class="fa fa-user"></i> Paciente<span class="fa arrow"></span></a>
+                        <li style='display: none;'>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="admin_registerp">Registrar</a>
-                                </li>
-                                <li>
-                                    <a href="admin_mypatients">Visualizar</a>
+                                    <a href="panels-wells.html">Panels and Wells</a>
                                 </li>
                             </ul>
+                            <!-- /.nav-second-level -->
                         </li>
-                        <li>
-                            <a href="#"><i class="fa fa-list-alt"></i> Receta<span class="fa arrow"></span></a>
+                        <li style='display: none;'>
+                            <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="admin_newrecipe">Registrar</a>
+                                    <a href="#">Second Level Item</a>
                                 </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-globe"></i> Web<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="admin_publish">Publicación</a>
+                                    <a href="#">Third Level <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="#">Third Level Item</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Third Level Item</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Third Level Item</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Third Level Item</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
                                 </li>
                             </ul>
+                            <!-- /.nav-second-level -->
                         </li>
-                        
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -290,7 +324,14 @@ menu = function(){
     </div>
 	<script>
     
-    
+    function menu_active(){
+        // var url = window.location.href;
+        // var id = url.substring(url.lastIndexOf('/') + 1);
+        // // alert(id); 
+        // $("a").removeClass("active");
+        
+        // $("a[href="+id+"]").addClass("active");
+    }
 
 	</script>
 	`;

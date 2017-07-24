@@ -122,10 +122,6 @@
         <%}%>
 
         $("#fullname").focus();
-
-        var optica = '<%=session.optica%>';
-        if(optica != 'null')
-            $("#optica").val(optica);
     });
     function paciente_verifyXfullname(callback){
         $.post('/paciente_verifyXfullname', {

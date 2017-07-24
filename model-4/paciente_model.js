@@ -81,9 +81,9 @@ exports.register = function(req, res, next){
 		
 		}else{
 			sql = `INSERT INTO paciente(
-		            fullname, yearold, datetime, telephone, optica, id_user)
+		            fullname, yearold, datetime, telephone, optica)
 		    	VALUES ('${body.fullname}', ${body.yearold}
-		    		, '${body.datetime}', '${body.telephone}', '${body.optica}','${req.session.id_user}') RETURNING id_paciente;
+		    		, '${body.datetime}', '${body.telephone}', '${body.optica}') RETURNING id_paciente;
 		`;
 		}
 		

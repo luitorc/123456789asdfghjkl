@@ -311,10 +311,7 @@
     <script src="js/luitor.js"></script>
     <script>
     $(document).ready(function() {
-        var optica = '<%=session.optica%>';
-        if(optica != 'null')
-            $("#optica").val(optica);
-
+        
         var comboplete1 = new Awesomplete('input.dropdown-input-esf-od', {
             minChars: 0
             ,autoFirst:true
@@ -672,15 +669,15 @@
                         +"</tr>"
                         +"<tr>"
                             +"<th class='cell_header'>OD.</th>"
-                            +"<td style='font-size:17px;'>"+dt.esf_od+"</td>"
-                            +"<td style='font-size:17px;'>"+dt.cil_od+"</td>"
-                            +"<td style='font-size:17px;'>"+dt.eje_od+"</td>"
+                            +"<td>"+dt.esf_od+"</td>"
+                            +"<td>"+dt.cil_od+"</td>"
+                            +"<td>"+dt.eje_od+"</td>"
                         +"</tr>"
                         +"<tr>"
                             +"<th class='cell_header'>OI.</th>"
-                            +"<td style='font-size:17px;'>"+dt.esf_oi+"</td>"
-                            +"<td style='font-size:17px;'>"+dt.cil_oi+"</td>"
-                            +"<td style='font-size:17px;'>"+dt.eje_oi+"</td>"
+                            +"<td>"+dt.esf_oi+"</td>"
+                            +"<td>"+dt.cil_oi+"</td>"
+                            +"<td>"+dt.eje_oi+"</td>"
                         +"</tr>"
                     +"</table>"
                     +"<table class='table' border='1' bordercolor='#D1D1D1'>"
@@ -690,10 +687,10 @@
                             +"<th class='cell_header'>EDAD</th>"
                         +"</tr>"
                         +"<tr>"
-                            +"<td style='font-size:17px;'>"+dt.add+"</td>"
-                            +"<td style='font-size:17px;'>"+dt.dip1+"</td>"
-                            +"<td style='font-size:17px;'>"+dt.dip2+"</td>"
-                            +"<td style='font-size:17px;'>"+dt.edad+"</td>"
+                            +"<td>"+dt.add+"</td>"
+                            +"<td>"+dt.dip1+"</td>"
+                            +"<td>"+dt.dip2+"</td>"
+                            +"<td>"+dt.edad+"</td>"
                         +"</tr>"
                     +"</table>"
                     +"<table class='table' border='1' bordercolor='#D1D1D1'>"
@@ -702,8 +699,8 @@
                             +"<th class='cell_header'>Precio</th>"
                         +"</tr>"
                         +"<tr>"
-                            +"<td style='font-size:16px;'>"+dt.producto+"</td>"
-                            +"<td style='font-size:17px;'>"+dt.precio+"</td>"
+                            +"<td>"+dt.producto+"</td>"
+                            +"<td>"+dt.precio+"</td>"
                         +"</tr>"
                         +"<tr>"
                             +"<th colspan='2' class='cell_header'>Recomendaciones</th>"
