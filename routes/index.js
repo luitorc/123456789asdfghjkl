@@ -57,7 +57,7 @@ exports.admin_registerp = function(req, res){
 exports.admin = function(req, res){
 	var params = {
 		title: "Admin"
-		// ,session: req.session
+		,session: req.session
 	};
 	// console.log(req.session.id_user);
 	if(req.session.id_user == undefined)
