@@ -28,7 +28,7 @@
     <div id="page-wrapper">
         <br>
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-12">
                 <ol class="breadcrumb">
                   <li><a href="#">Paciente</a></li>
                   <li class="active">Expediente</li>
@@ -36,14 +36,14 @@
             </div>
         </div>  
         <div class="row notify-danger" style='display: none;'>
-            <div class="col-lg-8">
+            <div class="col-lg-12">
                 <div class="alert alert-danger">
                     Lo sentimos, problema inesperado debido a codigo no ingresado. <a href="admin" class="alert-link">Regresar a Inicio</a>.
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-12">
                 <div id='bs_expediente'>
                     <table class='table'>
                         <tr>
@@ -108,7 +108,7 @@
                     $("#yearold").html(": "+patient.yearold);
                     $("#datetime").html(": "+patient.datetime.split("T")[0]);
                     $("#telephone").html(": "+patient.telephone);
-                    $("#optica").html(": OPTICA "+patient.optica);
+                    $("#optica").html(": Óptica "+patient.optica);
                     receta_getlistXpatient(idp);
                 });
             <% }else{ %>
@@ -159,7 +159,7 @@
                     +"<table class='' width='100%' border='0' bordercolor='#D1D1D1'>"
                         +"<tr>"
                             +"<td><button class='btn btn-social-icon btn-bitbucket' onclick=\"$('#bs_detailsRecipe').hide();$('#bs_expediente').show();\"><i class='fa fa-mail-reply'></i></button></td>"
-                            +"<td align='right' style='color:#3347AE;'>OPTICA "+dt.optica+", "+dt.timestamp_aux.split("T")[0]+"</td>"
+                            +"<td align='right' style='color:#3347AE;'>Óptica "+dt.optica+", "+dt.timestamp_aux.split("T")[0]+"</td>"
                         +"</tr>"
                     +"</table><br>"
                     +"<table class='table' border='1' bordercolor='#D1D1D1'>"

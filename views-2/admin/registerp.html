@@ -183,63 +183,57 @@
                 $("#optica").val(dt[0].optica);
             });
         }
-        var p_r = true;
         function paciente_register(){
-            if(p_r){ //Presionado 1 ves
-                // p_r = false;
-                $("#loading").show();
-                paciente_verifyXfullname(function(dt){
-                    if( dt.length > 0 ){
-                        $("#fullname").select();
-                        alert("Paciente existente, 'no se puede registrar el mismo paciente 2 veces'");
-                        $("#loading").hide();
-                        return;
+            
+            $("#loading").show();
+            paciente_verifyXfullname(function(dt){
+                if( dt.length > 0 ){
+                    $("#fullname").select();
+                    alert("Paciente existente, 'no se puede registrar el mismo paciente 2 veces'");
+                    $("#loading").hide();
+                    return;
+                }
+                var obj_in = {
+                    id_paciente: <%=idp%>
+                    ,fullname: $("#fullname").val()
+                    ,yearold: $("#yearold").val()
+                    ,datetime: $("#datetime").val()
+                    ,telephone: $("#telephone").val()
+                    ,optica: $("#optica").val()
+                } 
+                var err = verify(obj_in);
+                if(err){
+                    $("#loading").hide();
+                    return;
+                }
+
+
+                $.post('/paciente_register', obj_in , function(idp, textStatus, xhr) {
+                    <%if(idp!=0){%>
+                        $("#alert_msn").html("Se a actualizo con exito.")
+                        .removeClass("alert-success").addClass('alert-info');
+                    <%}else{%>
+                        $("#alert_msn").html("Se a registrado con exito.");
+                    <%}%> 
+
+                    if(!idp)
+                        alert('Lo sentimos, ocurrio un error inesperado, si el problema persiste, comunicarse el desarrollador');
+                    else{
+                        $("#alert_msn").fadeIn("slow"); 
+                        setTimeout(function(){
+                            $("#alert_msn").fadeOut("slow");
+                            <%if(idp!=0){%>
+                                window.location.href='admin_mypatients';
+                            <%}else{%>
+                                window.location.href='admin_newrecipe?idp='+idp+"&fullname="+obj_in.fullname;
+                            <%}%>
+                        },3000);
+                        clearForm();
                     }
-                    var obj_in = {
-                        id_paciente: <%=idp%>
-                        ,fullname: $("#fullname").val().toUpperCase()
-                        ,yearold: $("#yearold").val()
-                        ,datetime: $("#datetime").val()
-                        ,telephone: $("#telephone").val()
-                        ,optica: $("#optica").val()
-                    } 
-                    var err = verify(obj_in);
-                    if(err){
-                        $("#loading").hide();
-                        return;
-                    }
-
-
-                    $.post('/paciente_register', obj_in , function(idp, textStatus, xhr) {
-                        <%if(idp!=0){%>
-                            $("#alert_msn").html("Se a actualizo con exito.")
-                            .removeClass("alert-success").addClass('alert-info');
-                        <%}else{%>
-                            $("#alert_msn").html("Se a registrado con exito.");
-                        <%}%> 
-
-                        if(!idp){
-                            alert('Lo sentimos, ocurrio un error inesperado, si el problema persiste, comunicarse el desarrollador');
-                            p_r = true; // volvemos habilitar function al button
-                        }else{
-                            $("#alert_msn").fadeIn("slow"); 
-                            setTimeout(function(){
-                                $("#alert_msn").fadeOut("slow");
-                                <%if(idp!=0){%>
-                                    window.location.href='admin_mypatients';
-                                <%}else{%>
-                                    window.location.href='admin_newrecipe?idp='+idp+"&fullname="+obj_in.fullname;
-                                <%}%>
-                                p_r = true; // volvemos habilitar function al button
-                            },500);
-                            clearForm();
-                        }
-                        $("#loading").hide();
-                        
-                        
-                    });
+                    $("#loading").hide();
+                    
                 });
-            }
+            });
             
         }
         function verify(obj_in){

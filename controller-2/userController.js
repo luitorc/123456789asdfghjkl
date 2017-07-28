@@ -16,7 +16,3 @@ exports.logear = function(req, res, next){
 		res.send(dt[0]);
 	});
 }
-exports.close_session = function(req, res, next){
-	req.session.destroy();
-	res.redirect('/');
-}

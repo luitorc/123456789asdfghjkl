@@ -74,6 +74,7 @@
     //ACCESO
     app.get('/login', route.login);
         app.post('/user_logear', lt.controller('user').logear);
+        app.get('/user_close_session', lt.controller('user').close_session);
     //CONTACTO
     app.get('/contact',route.contact);
 
