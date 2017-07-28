@@ -189,7 +189,7 @@
                 // p_r = false;
                 $("#loading").show();
                 paciente_verifyXfullname(function(dt){
-                    if( dt.length > 0 ){
+                    if( dt.length > 0 && <%=idp%> == 0 ){
                         $("#fullname").select();
                         alert("Paciente existente, 'no se puede registrar el mismo paciente 2 veces'");
                         $("#loading").hide();
