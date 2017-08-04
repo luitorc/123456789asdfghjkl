@@ -1,0 +1,347 @@
+<% include layout/platform.html %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>ADMIN</title>
+    <link href="lib/sb-admin-2/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="lib/sb-admin-2/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link href="lib/sb-admin-2/dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="lib/sb-admin-2/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<!-- <link href="lib/sb-admin-2/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet"> -->
+	<!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap4.min.css"> -->
+    <style>
+		.breadcrumb li{
+            font-size: 16px;
+        }
+        .cell_header{
+            background-color: #F2F2F2;
+        }
+	</style>
+</head>
+
+<body>
+    <!-- /#wrapper -->
+    <%-menu()%>
+    <!-- Page Content -->
+    <div id="page-wrapper">
+        <br>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+		                <div class="col-lg-12">
+		                    <ol class="breadcrumb">
+		                      <li><a href="#">Paciente</a></li>
+		                      <li class="active">Visualizar</li>
+		                    </ol>
+		                </div>
+		            </div>
+                </div>
+            </div>	
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Lista de Pacientes
+                        </div>
+                        <div class="panel-body">
+	                        <div class="row">
+				                <div class="col-lg-12">
+									<!-- <div class="input-group custom-search-form">
+				                        <input type="text" class="form-control" placeholder="Busqueda de Paciente">
+				                        <span class="input-group-btn">
+				                            <button class="btn btn-default" type="button">
+				                                <i class="fa fa-search"></i>
+				                            </button>
+				                        </span>
+				                    </div> -->
+								</div>
+				            </div>
+                        	<div class="row">
+                                <div class="col-lg-12">
+                               		<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+			                            <thead>
+			                                <tr>
+			                                    <th>Cod.</th>
+			                                    <th>Nombres y Apellidos</th>
+			                                    <th>Edad</th>
+			                                    <th>Acción</th>
+			                                </tr>
+			                            </thead>
+			                            <tbody id='rowClients_content'></tbody>
+			                        </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal_patientRecord" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel">Expediente del Paciente</h4>
+                </div>
+                <div class="modal-body">
+                    <div id='bs_expediente'>
+                        <table class='table'>
+                            <tr>
+                                <th>Fecha de Registro</th>
+                                <td id="datetime">: Cargando...</td>
+                            </tr>
+                            <tr>
+                                <th>Nombres</th>
+                                <td id='fullname' style='font-weight: bold;'>: Cargando...</td>
+                            </tr>
+                            <tr>
+                                <th>Edad</th>
+                                <td id='yearold'>: Cargando...</td>
+                            </tr>
+                            <tr>
+                                <th>Telefono</th>
+                                <td id="telephone">: Cargando...</td>
+                            </tr>
+                            <tr>
+                                <th>Lugar de Registro</th>
+                                <td id="optica">: Cargando...</td>
+                            </tr>
+                        </table>
+                        <div id='options_Xpaciente' align="center"></div>
+                        <table class='table table-striped table-bordered' cellspacing="0" width="100%">
+                            <tr>
+                                <th colspan="5" align="center" style='text-align: center;'>HISTORIAL DE RECETAS DEL PACIETE</th>
+                            </tr>
+                            <tr>
+                                <th>C.</th>
+                                <th>Producto</th>
+                                <th>Precio</th>
+                                <th>Fecha</th>
+                                <th></th>
+                            </tr>
+                            <tbody id='tb_getlistXpatient'></tbody>
+                        </table>
+                    </div>
+                    <div id='bs_detailsRecipe'>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="lib/sb-admin-2/vendor/jquery/jquery.min.js"></script>
+    <script src="lib/sb-admin-2/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="lib/sb-admin-2/vendor/metisMenu/metisMenu.min.js"></script>
+    <script src="lib/sb-admin-2/dist/js/sb-admin-2.js"></script>
+	<!-- DataTables JavaScript -->
+	<script src="lib/sb-admin-2/vendor/datatables/js/jquery.dataTables.min.js"></script>
+	<script src="lib/sb-admin-2/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+	<!-- <script src="lib/sb-admin-2/vendor/datatables-responsive/dataTables.responsive.js"></script> -->
+	
+	<script>
+        var recipes = [];
+        var patients = [];
+		$(document).ready(function() {
+			
+		    paciente_getlist();
+		});
+        function receta_getlistXpatient(id_paciente){
+            $.post('/receta_getlistXpatient', {
+                id_paciente: id_paciente
+            }, function(dt, textStatus, xhr) {
+                var patient = patients[id_paciente];
+                // console.log(patient);
+                $("#fullname").html(": "+patient.fullname.toUpperCase());
+                $("#yearold").html(": "+patient.yearold);
+                $("#datetime").html(": "+patient.datetime.split("T")[0]);
+                $("#telephone").html(": "+patient.telephone);
+                $("#optica").html(": Óptica "+patient.optica);
+
+                $("#btn_new_recipe").click(function(){
+                    window.location.href='admin_newrecipe?idp='+patient.id_paciente;
+                });
+                var dh = "";
+                for(i in dt){
+                    recipes[dt[i].id_receta] = dt[i];
+                    dh+= "<tr id='recipe_"+dt[i].id_receta+"'>"
+                            +"<td>"+dt[i].id_receta+"</td>"
+                            +"<td>"+dt[i].producto+"</td>"
+                            +"<td>"+dt[i].precio+"</td>"
+                            +"<td>"+dt[i].timestamp_aux.split("T")[0]+"</td>"
+                            +"<td>"
+                            +"<button type='button' class='btn btn-info btn-circle btn-x2'  data-toggle='modal' data-target='#modal_patientRecipe' onclick=\"view_detailsRecipe("+dt[i].id_receta+");$('#bs_expediente').hide();$('#bs_detailsRecipe').show();\" title='Ver detalles de Receta'><i class='fa fa-search'></i></button>"
+                            +"&nbsp;&nbsp;&nbsp;"
+                            +"<button class='btn btn-warning btn-circle btn-x2' onclick='receta_editar("+dt[i].id_receta+")'><p class='fa fa-edit' title='Editar Receta'></p></button>"
+                            +"&nbsp;&nbsp;&nbsp;<button class='btn btn-danger btn-circle btn-x2' onclick=\"receta_delete("+dt[i].id_receta+");\" title='Eliminar Receta'><p class='fa fa-times' ></p></button></td>"
+                            
+                        +"</tr>";
+                }
+                $("#options_Xpaciente").html(
+                    "<button type='button' class='btn btn-success' onclick=\"window.location.href='admin_newrecipe?idp="+id_paciente+"';\" title='Registrar una nueva receta a este paciente'>Nueva Receta</button>&nbsp;"
+                    +"<button type='button' class='btn btn-warning' onclick='paciente_editar("+id_paciente+");' title='Editar datos de este paciente'>Editar Paciente</button>&nbsp;"
+                    +"<button type='button' class='btn btn-danger' onclick='paciente_delete("+id_paciente+");' title='Eliminar este paciente'>Eliminar Paciente</button><br><br>"
+                );
+                $("#tb_getlistXpatient").html(dh);
+            });
+        }
+        function view_detailsRecipe(idp){
+            var dt = recipes[idp];
+            console.log(dt);
+            var dh = ""
+                    +"<table class='' width='100%' border='0' bordercolor='#D1D1D1'>"
+                        +"<tr>"
+                            +"<td><button class='btn btn-social-icon btn-bitbucket' onclick=\"$('#bs_detailsRecipe').hide();$('#bs_expediente').show();\"><i class='fa fa-mail-reply'></i></button></td>"
+                            +"<td align='right' style='color:#3347AE;'>Óptica "+dt.optica+", "+dt.timestamp_aux.split("T")[0]+"</td>"
+                        +"</tr>"
+                    +"</table><br>"
+                    +"<table class='table' border='1' bordercolor='#D1D1D1'>"
+                        +"<tr>"
+                            +"<th class='cell_header' colspan='6'>Receta[#31]: "+dt.fullname+"</th>"
+                        +"</tr>"
+                        +"<tr>"
+                            +"<td></td>"
+                            +"<th class='cell_header'>Esf.</th>"
+                            +"<th class='cell_header'>Cil.</th>"
+                            +"<th class='cell_header'>Eje.</th>"
+                        +"</tr>"
+                        +"<tr>"
+                            +"<th class='cell_header'>OD.</th>"
+                            +"<td style='font-size:17px;'>"+dt.esf_od+"</td>"
+                            +"<td style='font-size:17px;'>"+dt.cil_od+"</td>"
+                            +"<td style='font-size:17px;'>"+dt.eje_od+"</td>"
+                        +"</tr>"
+                        +"<tr>"
+                            +"<th class='cell_header'>OI.</th>"
+                            +"<td style='font-size:17px;'>"+dt.esf_oi+"</td>"
+                            +"<td style='font-size:17px;'>"+dt.cil_oi+"</td>"
+                            +"<td style='font-size:17px;'>"+dt.eje_oi+"</td>"
+                        +"</tr>"
+                    +"</table>"
+                    +"<table class='table' border='1' bordercolor='#D1D1D1'>"
+                        +"<tr>"
+                            +"<th class='cell_header'>ADD</th>"
+                            +"<th colspan='2' class='cell_header'>DIP</th>"
+                            +"<th class='cell_header'>EDAD</th>"
+                        +"</tr>"
+                        +"<tr>"
+                            +"<td style='font-size:17px;'>"+dt.add+"</td>"
+                            +"<td style='font-size:17px;'>"+dt.dip1+"</td>"
+                            +"<td style='font-size:17px;'>"+dt.dip2+"</td>"
+                            +"<td style='font-size:17px;'>"+dt.edad+"</td>"
+                        +"</tr>"
+                    +"</table>"
+                    +"<table class='table' border='1' bordercolor='#D1D1D1'>"
+                        +"<tr>"
+                            +"<th class='cell_header'>Producto</th>"
+                            +"<th class='cell_header'>Precio</th>"
+                        +"</tr>"
+                        +"<tr>"
+                            +"<td style='font-size:16px;'>"+dt.producto+"</td>"
+                            +"<td style='font-size:17px;'>"+dt.precio+"</td>"
+                        +"</tr>"
+                        +"<tr>"
+                            +"<th colspan='2' class='cell_header'>Recomendaciones</th>"
+                        +"</tr>"
+                        +"<tr>"
+                            +"<td colspan='2'>"+dt.recomendaciones+"</td>"
+                        +"</tr>"
+                    +"</table>"
+            ;
+            $("#bs_detailsRecipe").html(dh);
+        }
+		function paciente_getlist(){
+            $.post('/paciente_getlist', {
+
+            }, function(dt, textStatus, xhr) {
+            	var dh = "";
+                for(i in dt){
+                    patients[dt[i].id_paciente] = dt[i];
+                   	dh+="<tr id='patient_"+dt[i].id_paciente+"'>"
+                   			+"<td>"+dt[i].id_paciente+"</td>"
+                   			+"<td>"+dt[i].fullname+"</td>"
+                   			+"<td>"+dt[i].yearold+"</td>"
+                   			+"<td>"
+                                +"<button type='button' class='btn btn-info btn-circle btn-x2'  data-toggle='modal' data-target='#modal_patientRecord' onclick=\"receta_getlistXpatient("+dt[i].id_paciente+");$('#bs_detailsRecipe').hide();$('#bs_expediente').show();\" title='Ver historial del paciente' style='box-shadow:"+(dt[i].rec_cant>0?'border-style: solid;border-width: 2px;border-color:#E815F0;':'')+"'><i class='fa fa-list'></i></button>"
+                                +"&nbsp;&nbsp;&nbsp;<button class='btn btn-success btn-circle btn-x2' onclick=\"window.location.href='admin_newrecipe?idp="+dt[i].id_paciente+"'\" title='Añadir nueva receta'><p class='glyphicon glyphicon-plus' ></p></button>"
+                                +"&nbsp;&nbsp;&nbsp;<button class='btn btn-warning btn-circle btn-x2' onclick=\"paciente_editar("+dt[i].id_paciente+")\" title='Editar datos del paciente'><p class='fa fa-edit'></p></button>"
+                   				+"&nbsp;&nbsp;&nbsp;<button class='btn btn-danger btn-circle btn-x2' onclick=\"paciente_delete("+dt[i].id_paciente+");\" title='Eliminar paciente'><p class='fa fa-times'></p></button>"
+                   			+"</td>"
+                   		+"</tr>";
+                   	  
+                }
+// $("#patient_"+id_paciente+" recipe_").css({'box-shadow':'3px 10px 10px #D51F1F'});
+                $("#rowClients_content").html(dh);
+                $('#dataTables-example').DataTable({
+			        responsive: true
+			    });
+            });
+
+        }
+        function receta_delete(id){
+            var r = confirm("¿Esta seguro que desea eliminar receta?");
+            if (r == false)
+                return;
+            $.post('/receta_delete', {
+                idr: id
+            }, function(confirm, textStatus, xhr) {
+                var confirm = confirm.rowCount;
+
+                var txt;
+
+                if(confirm)
+                    $("#recipe_"+id).remove();
+            });
+        }
+        function paciente_editar(id){
+            var r = confirm("¿Esta seguro que desea editar al Paciente?");
+            if (r == false)
+                return;
+            window.location.href='admin_registerp?idp='+id+'&edit';
+        }
+        function paciente_delete(id){
+            var r = confirm("¿Esta seguro que desea eliminar Paciente?, Si acepta, se eliminara toda la información y sus recetas del paciente a eliminar");
+            if (r == false)
+                return;
+            $.post('/paciente_delete', {
+                idp: id
+            }, function(confirm, textStatus, xhr) {
+                var confirm = confirm.rowCount;
+                if(confirm)
+                    $("#patient_"+id).remove();
+            });
+        }
+
+        function receta_editar(id){
+            var r = confirm("¿Esta seguro que desea editar la Receta?");
+            if (r == false)
+                return;
+            window.location.href='admin_newrecipe?idr='+id;
+        }
+        function receta_delete(id){
+            var r = confirm("¿Esta seguro que desea eliminar la Receta?");
+            if (r == false)
+                return;
+            $.post('/receta_delete', {
+                idr: id
+            }, function(confirm, textStatus, xhr) {
+                var confirm = confirm.rowCount;
+                if(confirm){
+                    alert("Receta eliminada Exitosamente");
+                    $("#recipe_"+id).remove();
+                }
+            });
+        }
+	</script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<% include layout/platform.html %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>ADMIN</title>
+    <link href="lib/sb-admin-2/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="lib/sb-admin-2/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link href="lib/sb-admin-2/dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="lib/sb-admin-2/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://192.168.1.37:2000/lib/jQuery-TE_v.1.4.0/jquery-te-1.4.0.css" rel="stylesheet" type="text/css">
+</head>
+
+<body onload="menu_active()">
+    <!-- /#wrapper -->
+    <%-menu()%>
+    <!-- Page Content -->
+    <div id="page-wrapper">
+    <br>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="panel panel-default">
+              <div class="panel-heading"><b>PASO 1</b> Publicación Resumida</div>
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-lg-7">
+                    <div class="form-group">
+                      <label>Titulo</label>
+                      <input class="form-control" id="title" value="Servicios de Informatica">
+                    </div>
+                    <div class="form-group">
+                      <label>Breve Descripción</label>
+                      <textarea class="form-control" rows="5" id="description">Brindo mis servicios en el area de informatica, responsabilidad y puntualidad siempre presente</textarea>
+                      <p class="help-block" style=""><i>Le recomendamos redactar un contenido clave, para captar el interes del empleador.<br>(Max. 255 caracteres)</i>
+                      </p>
+                    </div>
+                    <div class="form-group">
+                      <label>Pais Actual</label>
+                      <input class="form-control" value="ILO">
+                      <p class="help-block"><i>Ejemplo: Chile, Perú, Arica, etc.</i></p>
+                    </div>
+                    <div class="form-group">
+                      <label>Ciudad Actual</label>
+                      <input class="form-control" value="ILO">
+                      <p class="help-block"><i>Ejemplo: Ilo, Moquegua, Arica, etc.</i></p>
+                    </div>
+                  </div>
+                  <div class="col-lg-5" align="center">
+                    <img src="http://v4.pingendo.com/assets/photos/food/photo-1.jpg" width="80%" style="box-shadow:4px 3px 4px #999;">
+                    <div class="form-group">
+                      <label>Seleccione la Imagen de publicación</label>
+                      <input type="file">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-12">
+                    <button type="button" class="btn btn-outline btn-primary btn-lg btn-block" onclick="to_post();">Siguiente</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="panel panel-default">
+              <div class="panel-heading"><b>PASO 2 <span style="color:blue;">(Ultimo Paso)</span></b> contenido completo de publicación</div>
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div style="font-weight: bold;font-size:20px;text-align:center;text-decoration: underline;margin:auto;display: none;">Contenido completo de la Publicación
+                    </div>
+                    <div style="width: 100%;margin: auto;">
+                      <textarea id="content"></textarea>
+                    </div>
+                    <p class="help-block" style="margin-top: -30px;"><i>Aqui usted podra redactar todo el contenido que quiere mostrar a los empleadores, cuando ellos hagan click en mas detalles de publicación. <br>Le recomendamos tomarse un tiempo, he intentar hacer un contenido interesante y convencedora.</i>
+                    </p>
+                    <br>
+                    <div class="form-group has-error">
+                      <label style="color:#AC2424;">Seleccione Categoria de Bolsa de Trabajo <span style="color:red;">(Importante*)</span></label>
+                      <select class="form-control">
+                        <option value="seleccione">seleccione</option>
+                        <option value="Administración">Administración</option>
+                        <option value="Call Center">Call Center</option>
+                        <option value="Comercio Exterior">Comercio Exterior</option>
+                        <option value="Comunicación">Comunicación</option>
+                      </select>
+                      <p class="help-block"><i>La publicación sera alojada la categoria que usted seleccione.</i></p>
+                    </div>
+                    <div class="checkbox">
+                      <label style="color:#DA1616;">
+                        <input type="checkbox" value="on"> Acepto los terminos y condiciones, afirmo que los datos son originales, verdaderos, y estan escritos correctamente, de no ser asi, acepto asumir la sanción correspondiente.
+                      </label>
+                    </div>
+                    <button type="button" class="btn btn-outline btn-success btn-lg btn-block" onclick="to_post();">Acepto condiciones y Postear contenido</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <br>
+    <script src="lib/sb-admin-2/vendor/jquery/jquery.min.js"></script>
+    <script src="lib/sb-admin-2/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="lib/sb-admin-2/vendor/metisMenu/metisMenu.min.js"></script>
+    <script src="lib/sb-admin-2/dist/js/sb-admin-2.js"></script>
+    <script src="http://192.168.1.37:2000/lib/jQuery-TE_v.1.4.0/jquery-te-1.4.0.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('#content').jqte();
+    });
+    function to_post(){
+      $.post('copor_post', {
+        param1: 'value1'
+      }, function(dt, textStatus, xhr) {
+        /*optional stuff to do after success */
+        console.log(dt);
+      });
+    }
+    </script>
+
+</body>
+</html>

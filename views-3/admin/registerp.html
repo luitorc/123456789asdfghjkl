@@ -186,7 +186,7 @@
         var p_r = true;
         function paciente_register(){
             if(p_r){ //Presionado 1 ves
-                p_r = false;
+                // p_r = false;
                 $("#loading").show();
                 paciente_verifyXfullname(function(dt){
                     if( dt.length > 0 && <%=idp%> == 0 ){
@@ -205,7 +205,6 @@
                     } 
                     var err = verify(obj_in);
                     if(err){
-                        p_r = true;
                         $("#loading").hide();
                         return;
                     }
