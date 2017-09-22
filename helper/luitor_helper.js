@@ -82,6 +82,15 @@ exports.connection = function(type) {
 			var pg = require('pg');
 			
 			// console.log("entro")
+			var config = {
+				host: 'a2ss35.a2hosting.com', // Server hosting the postgres database 
+				user: 'iloredco', //env var: PGUSER 
+				password: 'supermario123', //env var: PGPASSWORD 
+				database: 'iloredco_sistema_optica_mod01', //env var: PGDATABASE 
+				port: 5432, //env var: PGPORT 
+				max: 50, // max number of clients in the pool 
+				idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed 
+			};
 			var pool = new pg.Pool(config);
 			return pool;
 			break;
