@@ -15,7 +15,7 @@ app.engine('html', engine);
 
 
 
-var PORT = process.env.PORT || 3500;
+var PORT = process.env.PORT || 8080;
 // Configuration
 app.configure(function () {
     app.use(function (req, res, next) {
