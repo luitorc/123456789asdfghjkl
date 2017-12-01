@@ -125,23 +125,3 @@ LEFT JOIN receta as rec ON pac.id_paciente = rec.id_paciente GROUP BY pac.id_pac
 
 	});
 }
-exports.getlistSearch = function(req, res, next){
-
-	db.connect(function(err, client, done) {
-		if(err) return console.error('error fetching client from pool', err);
-		// var sql = `SELECT id_paciente, fullname, yearold, telephone,datetime FROM paciente`;
-		var sql = `SELECT pac.id_paciente, pac.fullname FROM paciente as pac`;
-
-			client.query(sql, function(err, result) {
-
-				done();
-
-				if(err){
-					res.send(false); //devolver 0 or false for find error
-					return console.error('error running query', err);
-				}
-				res.send(result.rows);
-			});
-
-	});
-}

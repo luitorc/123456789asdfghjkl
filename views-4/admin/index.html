@@ -63,7 +63,7 @@
                                 <div class="form-group">
                                     
                                     <label style="color:#848484;">Ingrese Nombres del paciente: </label>
-                                    <input type="text" class="form-control" style='padding: 25px;font-size:20px;' placeholder="Cargando Buscador..." id="search_patient" class='awesomplete' disabled="true">
+                                    <input type="text" class="form-control" style='padding: 25px;font-size:20px;' placeholder="Buscador de Pacientes" id="search_patient" class='awesomplete'>
                                    
                                     <!-- <span class="input-group-btn" style='margin: 25px;'>
                                         <button class="btn btn-default" type="button"><i class="fa fa-search" style="padding: 12px;"></i>
@@ -101,10 +101,9 @@
         function paciente_getlist(){
             listAll = [];
             listAll_cod = [];
-            $.post('/paciente_getlistSearch', {
-
+            $.post('/paciente_getlist', {
             }, function(dt, textStatus, xhr) {
-                // console.log(dt);
+                console.log(dt);
                 var input = document.getElementById("search_patient");
                 awesomplete = new Awesomplete(input);
                 for(i in dt){
@@ -116,7 +115,6 @@
                 // console.log(listAll);
                 // $("#search_patient").css('width','400px');
                 // console.log("entro");
-                $("#search_patient").attr('placeholder','Ingrese Nombres del Paciente').attr('disabled',false);
                 $("#search_patient").focus();
             });
         }
