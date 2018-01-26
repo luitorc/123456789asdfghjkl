@@ -72,7 +72,30 @@
         app.post('/publish_register', lt.model('publish').register);
 
     //ACCESO
-    app.get('/login', route.login);
+    // app.get('/login', route.login);
+    app.get('/login', function(req, res){
+        var params = {
+            title: "Aces"
+        };
+        var user_name = req.query.user_name;
+        var password = req.query.password;
+        if(user_name && password){
+            console.log("params");
+            req.body = {
+                user_name: user_name
+                ,password: password    
+            }
+            lt.controller('user').logear(req, res,"fast",function(){
+                res.redirect('/admin');
+                
+            });
+        }else{
+            console.log("No params");
+            res.render('login', params);
+        }
+        
+
+    });
         app.post('/user_logear', lt.controller('user').logear);
         app.get('/user_close_session', lt.controller('user').close_session);
     //CONTACTO

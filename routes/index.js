@@ -72,12 +72,19 @@ exports.index = function(req, res){
 	};
 	res.render('index', params);
 }
-exports.login = function(req, res){
-	var params = {
-		title: "Aces"
-	};
-	res.render('login', params);
-}
+// exports.login = function(req, res){
+// 	var params = {
+// 		title: "Aces"
+// 	};
+// 	var user_name = req.query.user_name;
+// 	var password = req.query.password;
+// 	if(user_name && password)
+// 		console.log("params");
+// 	else
+// 		console.log("No params");
+	
+// 	res.render('login', params);
+// }
 exports.contact = function(req, res){
 	var params = {
 		title: "Contactanos"
