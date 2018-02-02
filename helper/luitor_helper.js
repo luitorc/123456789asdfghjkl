@@ -85,7 +85,7 @@ exports.connection = function(type) {
 			var config = {
 				host: 'a2ss35.a2hosting.com', // Server hosting the postgres database 
 				user: 'iloredco', //env var: PGUSER 
-				password: 'SuperMario123456', //env var: PGPASSWORD 
+				password: '', //env var: PGPASSWORD 
 				database: 'iloredco_sistema_optica_mod01', //env var: PGDATABASE 
 				port: 5432, //env var: PGPORT 
 				max: 50, // max number of clients in the pool 
