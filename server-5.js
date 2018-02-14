@@ -121,18 +121,13 @@
         app.post('/receta_delete', lt.model('receta').delete);
     // PATIENT RECORD
     app.get('/admin_patientRecord', route.admin_patientRecord);
-    app.get('/admin_recibo_register', route.admin_recibo_register);
-    //RECIBO TEMPORAL - POST
-    app.post('/recibo_tmp@registrar_recibo_tmp', lt.controller('recibo_tmp').registrar_recibo_tmp);
-    app.post('/recibo_tmp_model@getReciboComplete', lt.model('recibo_tmp').getReciboComplete);
-    app.post('/recibo_tmp_model@getAllVentasListXpaciente', lt.model('recibo_tmp').getAllVentasListXpaciente);
 
     /*Admin - PACIENTE-FIN*/
 
     http.createServer(app).listen(PORT, function () {
         console.log("Express server listening on port " + PORT);
     });
-    // setInterval(function(){
-    //     console.log("Testeando");
-    // },5000);
+    setInterval(function(){
+        console.log("Testeando");
+    },5000);
 }).call(this);

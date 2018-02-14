@@ -25,7 +25,7 @@
     <div id="page-wrapper">
         <br>
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-8">
                 <div class="row">
                     <div class="col-lg-12">
                         <ol class="breadcrumb">
@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-8">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         Formulario de Publicación
@@ -113,7 +113,8 @@
         function publish_register(){
             $("#loading").show();
             if( ltdata_img != "null" ){
-                $.post('//ilored.com/helper_g.php', {
+                $.post('http://127.0.0.1:4000', {
+                //$.post('//ilored.com/helper_g.php', {
                 // $.post('//127.0.0.1:1800/helper_g.php', {
                     btn:'savefile64'
                     ,name1: "opticainnova/"+name

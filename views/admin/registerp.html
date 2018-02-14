@@ -229,7 +229,9 @@
                                 <%if(idp!=0){%>
                                     window.location.href='admin_mypatients';
                                 <%}else{%>
-                                    window.location.href='admin_newrecipe?idp='+idp+"&fullname="+obj_in.fullname;
+                                    window.location.href='admin_recibo_register?idp='+idp+'&newp';
+
+                                    // window.location.href='admin_newrecipe?idp='+idp+"&fullname="+obj_in.fullname;
                                 <%}%>
                                 p_r = true; // volvemos habilitar function al button
                             },500);

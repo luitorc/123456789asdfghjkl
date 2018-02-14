@@ -28,7 +28,7 @@
     <div id="page-wrapper">
         <br>
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-8">
                 <ol class="breadcrumb">
                   <li><a href="#">Paciente</a></li>
                   <li class="active">Expediente</li>
@@ -36,14 +36,14 @@
             </div>
         </div>  
         <div class="row notify-danger" style='display: none;'>
-            <div class="col-lg-12">
+            <div class="col-lg-8">
                 <div class="alert alert-danger">
                     Lo sentimos, problema inesperado debido a codigo no ingresado. <a href="admin" class="alert-link">Regresar a Inicio</a>.
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-8">
                 <div id='bs_expediente'>
                     <table class='table'>
                         <tr>
@@ -103,12 +103,13 @@
         $(document).ready(function() {
             <% if(idp!=0){ %>
                 var idp=<%=idp%>;
+                $("#tb_getlistXpatient").html("<tr><td colspan='5' style='font-size:20px;'>CARGANDO...</td></tr>");
                 paciente_get(idp,function(patient){
                     $("#fullname").html(": "+patient.fullname.toUpperCase());
                     $("#yearold").html(": "+patient.yearold);
                     $("#datetime").html(": "+patient.datetime.split("T")[0]);
                     $("#telephone").html(": "+patient.telephone);
-                    $("#optica").html(": Óptica "+patient.optica);
+                    $("#optica").html(": OPTICA "+patient.optica);
                     receta_getlistXpatient(idp);
                 });
             <% }else{ %>
@@ -127,6 +128,7 @@
             });
         }
         function receta_getlistXpatient(id_paciente){
+
             $.post('/receta_getlistXpatient', {
                 id_paciente: id_paciente
             }, function(dt, textStatus, xhr) {
@@ -158,13 +160,38 @@
             var dh = ""
                     +"<table class='' width='100%' border='0' bordercolor='#D1D1D1'>"
                         +"<tr>"
-                            +"<td><button class='btn btn-social-icon btn-bitbucket' onclick=\"$('#bs_detailsRecipe').hide();$('#bs_expediente').show();\"><i class='fa fa-mail-reply'></i></button></td>"
-                            +"<td align='right' style='color:#3347AE;'>Óptica "+dt.optica+", "+dt.timestamp_aux.split("T")[0]+"</td>"
+                            +"<td width='16%'>"
+                                +"<button class='btn btn-social-icon btn-bitbucket' onclick=\"$('#bs_detailsRecipe').hide();$('#bs_expediente').show();\"><i class='fa fa-mail-reply'></i></button>"
+                            +"</td>"
+                            +"<td>";
+                            var printerDT = " ------------------------------<br>"
+                            +"Receta("+dt.id_receta+")<br>"
+                            +""+dt.optica+" ["+dt.timestamp_aux.split("T")[0]+"]<br>"
+                            +"Paciente: "+dt.fullname+"<br>"
+                            +"Detalle de Receta>> <br>"
+                            +"<br>"
+                                +"         Esf.     Cil.     Eje.<br>"
+                                +"OD.    "+(dt.esf_od==''?'     ':dt.esf_od)+"     "+dt.cil_od+"     "+dt.eje_od+"<br>"
+                                +"OI.    "+(dt.esf_oi==''?'     ':dt.esf_oi)+"     "+dt.cil_oi+"     "+dt.eje_oi+"<br>"
+                                +"<br>"
+                                +"ADD     DIP1      DIP2     EDAD<br>"
+                                +(dt.add==''?'      ':dt.add)+"   "
+                                +(dt.dip1==''?'      ':dt.dip1)+"        "
+                                +(dt.dip2==''?'      ':dt.dip2)+"       "
+                                +(dt.edad==''?'      ':dt.edad)+"        "
+                                +"<br>"
+                                +"Producto: "+dt.producto+"<br>"
+                                +"Precio: "+dt.precio+"<br>"
+                                +"Recomendaciones: "+(dt.recomendaciones==undefined?'':dt.recomendaciones)
+                            ;
+                                dh+="<a href='intent://zj.com.cn.bluetooth.sdk/#Intent;scheme=launch;package=zj.com.cn.bluetooth.sdk;S.COD_RECIPE="+printerDT+";end'><p class='fa fa-print' style='font-size:34px;'></p></a>"
+                            +"</td>"
+                            +"<td align='right' style='color:#3347AE;'>OPTICA "+dt.optica+", "+dt.timestamp_aux.split("T")[0]+"</td>"
                         +"</tr>"
                     +"</table><br>"
                     +"<table class='table' border='1' bordercolor='#D1D1D1'>"
                         +"<tr>"
-                            +"<th class='cell_header' colspan='6'>Receta[#31]: "+dt.fullname+"</th>"
+                            +"<th class='cell_header' colspan='6'>Receta[#"+dt.id_receta+"]: "+dt.fullname+"</th>"
                         +"</tr>"
                         +"<tr>"
                             +"<td></td>"

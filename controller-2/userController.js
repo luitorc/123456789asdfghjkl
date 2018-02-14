@@ -1,7 +1,7 @@
 var lt = require('../helper/luitor_helper.js');
 var user_model = lt.model('user');
 
-exports.logear = function(req, res, next){
+exports.logear = function(req, res, next,callback=false){
 	req.body.controller=true;
 
 	user_model.verify(req, function(dt){
@@ -13,6 +13,14 @@ exports.logear = function(req, res, next){
 			req.session.optica = dt[0].optica;
 			console.log(req.session);
 		}
-		res.send(dt[0]);
+		if(next == 'fast'){
+			console.log("Access fast");
+			callback(true);
+		}else
+			res.send(dt[0]);
 	});
+}
+exports.close_session = function(req, res, next){
+	req.session.destroy();
+	res.redirect('/');
 }

@@ -157,6 +157,7 @@
 		    paciente_getlist();
 		});
         function receta_getlistXpatient(id_paciente){
+
             $.post('/receta_getlistXpatient', {
                 id_paciente: id_paciente
             }, function(dt, textStatus, xhr) {
@@ -202,12 +203,35 @@
                     +"<table class='' width='100%' border='0' bordercolor='#D1D1D1'>"
                         +"<tr>"
                             +"<td><button class='btn btn-social-icon btn-bitbucket' onclick=\"$('#bs_detailsRecipe').hide();$('#bs_expediente').show();\"><i class='fa fa-mail-reply'></i></button></td>"
+                            +"<td>";
+                            var printerDT = " ------------------------------<br>"
+                            +"Receta("+dt.id_receta+")<br>"
+                            +""+dt.optica+" ["+dt.timestamp_aux.split("T")[0]+"]<br>"
+                            +"Paciente: "+dt.fullname+"<br>"
+                            +"Detalle de Receta>> <br>"
+                            +"<br>"
+                                +"         Esf.     Cil.     Eje.<br>"
+                                +"OD.    "+(dt.esf_od==''?'     ':dt.esf_od)+"     "+dt.cil_od+"     "+dt.eje_od+"<br>"
+                                +"OI.    "+(dt.esf_oi==''?'     ':dt.esf_oi)+"     "+dt.cil_oi+"     "+dt.eje_oi+"<br>"
+                                +"<br>"
+                                +"ADD     DIP1      DIP2     EDAD<br>"
+                                +(dt.add==''?'      ':dt.add)+"   "
+                                +(dt.dip1==''?'      ':dt.dip1)+"        "
+                                +(dt.dip2==''?'      ':dt.dip2)+"       "
+                                +(dt.edad==''?'      ':dt.edad)+"        "
+                                +"<br>"
+                                +"Producto: "+dt.producto+"<br>"
+                                +"Precio: "+dt.precio+"<br>"
+                                +"Recomendaciones: "+(dt.recomendaciones==undefined?'':dt.recomendaciones)
+                            ;
+                                dh+="<a href='intent://zj.com.cn.bluetooth.sdk/#Intent;scheme=launch;package=zj.com.cn.bluetooth.sdk;S.COD_RECIPE="+printerDT+";end'><p class='fa fa-print' style='font-size:34px;'></p></a>"
+                            +"</td>"
                             +"<td align='right' style='color:#3347AE;'>Óptica "+dt.optica+", "+dt.timestamp_aux.split("T")[0]+"</td>"
                         +"</tr>"
                     +"</table><br>"
                     +"<table class='table' border='1' bordercolor='#D1D1D1'>"
                         +"<tr>"
-                            +"<th class='cell_header' colspan='6'>Receta[#31]: "+dt.fullname+"</th>"
+                            +"<th class='cell_header' colspan='6'>Receta[#"+dt.id_receta+"]: "+dt.fullname+"</th>"
                         +"</tr>"
                         +"<tr>"
                             +"<td></td>"
@@ -261,6 +285,8 @@
             $("#bs_detailsRecipe").html(dh);
         }
 		function paciente_getlist(){
+            $("#rowClients_content").html("<tr><td style='font-size:28px;' colspan='4'>CARGANDO...</td></tr>");
+            console.log("ENTRO");
             $.post('/paciente_getlist', {
 
             }, function(dt, textStatus, xhr) {

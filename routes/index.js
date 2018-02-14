@@ -1,4 +1,14 @@
 
+exports.admin_recibo_register = function(req, res){
+	var params = {
+		title: "Registro de venta"
+		,session: req.session
+		,q: req.query
+	};
+	// if(req.session.id_user == undefined)
+	// 	res.redirect('/');
+	res.render('admin/recibo_register', params);
+}
 exports.admin_publish = function(req, res){
 	var params = {
 		title: "Publicación"
@@ -62,6 +72,9 @@ exports.admin = function(req, res){
 	// console.log(req.session.id_user);
 	if(req.session.id_user == undefined)
 		res.redirect('/');
+	
+	//test access fast
+	// res.redirect('admin_recibo_register');
 
 	res.render('admin/index', params);
 }
@@ -70,6 +83,8 @@ exports.index = function(req, res){
 	var params = {
 		title: "Principal"
 	};
+	// res.redirect('admin_recibo_register');
+
 	res.render('index', params);
 }
 // exports.login = function(req, res){

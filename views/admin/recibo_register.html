@@ -1,0 +1,323 @@
+<% include layout/platform.html %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>ADMIN</title>
+    <link href="lib/sb-admin-2/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="lib/sb-admin-2/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link href="lib/sb-admin-2/dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="lib/sb-admin-2/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <script src="js/luitor.js"></script>
+</head>
+
+<body>   
+    <!-- /#wrapper -->
+    <%-menu()%>
+    <!-- Page Content -->
+    <div id="page-wrapper">
+        <br>
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ol class="breadcrumb">
+                          <li><a href="#">PACIENTE</a></li>
+                          <li class="active">ORDEN DE TRABAJO</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Registro de venta
+                        <div class="pull-right">
+                                <div class="btn-group">
+                                    <a href='/' target="_blank" class="btn btn-default btn-xs dropdown-toggle">
+                                        <!-- Visualizar Todas las ventas -->
+                                    </a>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <table class='table'>
+                                    <tr>
+                                        <td colspan="4" align="center" style="background: #F0F0F0;"><h4><b>ORDEN DE TRABAJO</b></h4></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="1" style="font-size:18px;">Fecha: 09/02/2018</td>
+                                        <td colspan="1" align="right" style='font-size:20px;font-weight: bold;'> N°.</td>
+                                        <td colspan="2"> 
+                                            <input type="text" class='form-control' value="123" id="re_nro_recibo">
+                                            <small>Numero de Recibo</small> 
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Paciente</td>
+                                        <td colspan="3">
+                                            <input type="text" class='form-control' value="123" id="re_paciente_name">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Telefono</td>
+                                        <td>
+                                            <input type="text" class='form-control' value="123" id="re_telefono">
+                                        </td>
+                                        <td>Codigo</td>
+                                        <td><input type="text" class='form-control' value="123" id="re_codigo">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dirección</td>
+                                        <td colspan="3">
+                                            <input type="text" class='form-control' value="123" id="re_direccion">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4">
+                                            <table class='table'>
+                                                <tr>
+                                                    <th>CANT</th>
+                                                    <th>DESCRIPCIÓN</th>
+                                                    <th>SUB TOTAL</th>
+                                                </tr>
+                                                <tbody id="descriptionContent">
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <%if(q.idp){%>
+                                    <tr>
+                                        <td colspan="4" align="right">
+                                            <button onclick="addNewRowDetails('+')">+</button>
+                                            &nbsp;&nbsp;
+                                            <button onclick="addNewRowDetails('-')">-</button>
+                                        </td>
+                                    </tr>
+                                    <%}%>
+                                    <tr>
+                                        <td rowspan="3" colspan="1">
+                                            <div class="panel panel-default">
+                                                <div class="panel-body">
+                                                    <div>Fecha de Entrega: </div>
+                                                    <input type="date" id="re_fecha_entrega" value="2017-05-12">
+                                                    <br>Hora: <br>
+                                                    <input type="time" id="re_hora_entrega" value="13:30:00">
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td align="right" colspan="2">TOTAL (S/.)</td>
+                                        <td>
+                                            <input type="text" class='form-control' value="123" id="re_total">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" colspan="2">A CUENTA (S/.)</td>
+                                        <td>
+                                            <input type="text" class='form-control' value="123" id="re_acuenta">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" colspan="2">SALDO (S/.)</td>
+                                        <td>
+                                            <input type="text" class='form-control' value="123" id="re_saldo">
+                                        </td>
+                                    </tr>
+                                    <%if(q.view == ""){%>
+                                    <tr>
+                                        <td colspan="4" align="center">
+                                            <a href="#" type="button" class="btn btn-info" onclick="registrar(true);">Regresar</a>
+                                        </td>
+                                    </tr>
+                                    <%}else{%>
+                                    <tr>
+                                        <td colspan="4" align="center">
+                                            <%if(q.idr){%>
+                                                <button type="button" class="btn btn-primary" onclick="registrar(true);">Actualizar</button>
+                                                 <button type="button" class="btn btn-info" onclick="window.location.reload()">Volver los datos anteriores</button>
+                                            <%}else{%>
+                                                <button type="button" class="btn btn-primary" onclick="registrar(true);">Registrar</button>&nbsp;
+                                                 <button type="button" class="btn btn-info" onclick="window.location.reload()">Limpiar Registro</button>
+                                                 <%if(q.newp == ""){%>
+                                                 &nbsp;&nbsp;
+                                                    <a href="admin_newrecipe?idp=<%=q.idp%>" type="button" class="btn btn-warning">Omitir</a>
+                                                 <%}%>
+                                            <%}%>
+                                           
+                                        </td>
+                                    </tr>
+                                    <%}%>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </div>
+    <script src="lib/sb-admin-2/vendor/jquery/jquery.min.js"></script>
+    <script src="lib/sb-admin-2/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="lib/sb-admin-2/vendor/metisMenu/metisMenu.min.js"></script>
+    <script src="lib/sb-admin-2/dist/js/sb-admin-2.js"></script>
+    <script>
+        //Dinamic Interface
+        $(document).ready(function() {
+            <%if(q.idp){%>
+                addNewRowDetails('+');
+            <%}%>
+        }); 
+        var dh;
+        var contRowDetails = 0;
+        function addNewRowDetails(action, obj={}){
+            if(action == "+"){
+                contRowDetails++;
+                dh ="<tr>"
+                +"    <td width='10'>"+zeroFill(contRowDetails,2)
+                        +"<input type='hidden' id='id_producto_tmp' value='"+(obj.id_producto_tmp?obj.id_producto_tmp:'')+"'>"
+                +"    </td>"
+                +"    <td width='60%'>"
+                +"        <input type='text' class='form-control' id='pr_description' value='"+(obj.pr_description?obj.pr_description:'')+"'>"
+                +"    </td>"
+                +"    <td width='30%'>"
+                +"        <input type='text' class='form-control' id='pr_subtotal' value='"+(obj.pr_subtotal?obj.pr_subtotal:'')+"'>"
+                +"    </td>"
+                +"</tr>";
+                $("#descriptionContent").append(dh);
+
+            }else{
+                if( $("#descriptionContent tr").length > 1 ){
+                    contRowDetails--;
+                    $("#descriptionContent tr:last").remove();                
+                }
+            }
+            
+            
+        }
+        function zeroFill( number, width )
+        {
+          width -= number.toString().length;
+          if ( width > 0 )
+          {
+            return new Array( width + (/\./.test( number ) ? 2 : 1) ).join( '0' ) + number;
+          }
+          return number + ""; // siempre devuelve tipo cadena
+        }
+
+    </script>
+    <script>
+        //Register
+        function registrar(bool){
+            var producto_tmp_arr=[];
+            var obj_tmp = {};
+            $("#descriptionContent tr").each(function(i, el) {
+                obj_tmp = {
+                    id_producto_tmp: $(el).find("#id_producto_tmp").val()
+                    ,pr_description: $(el).find("#pr_description").val()
+                    ,pr_subtotal: $(el).find("#pr_subtotal").val()
+                }
+                producto_tmp_arr.push(obj_tmp);
+            });
+            // console.log(producto_tmp_arr);
+            // return;
+            var id_recibo_tmp = 0;
+            <%if(q.idr){%>
+                id_recibo_tmp = <%=q.idr%>;
+            <%}%>
+            var obj_in = {
+                id_recibo_tmp: id_recibo_tmp
+                ,re_nro_recibo: $("#re_nro_recibo").val()
+                ,re_paciente_name: $("#re_paciente_name").val()
+                ,re_telefono: $("#re_telefono").val()
+                ,re_codigo: $("#re_codigo").val()
+                ,re_direccion: $("#re_direccion").val()
+                ,re_fecha_entrega: $("#re_fecha_entrega").val()
+                ,re_hora_entrega: $("#re_hora_entrega").val()
+                ,re_total: $("#re_total").val()
+                ,re_acuenta: $("#re_acuenta").val()
+                ,re_saldo: $("#re_saldo").val()
+                ,producto_tmp_arr: producto_tmp_arr
+            }
+            
+            console.log(obj_in);
+            $.post('/recibo_tmp@registrar_recibo_tmp', obj_in, function(dt, textStatus, xhr) {
+                console.log(dt);
+                window.history.back();
+            });
+        }
+    </script>
+    <script>
+        $(document).ready(function() {
+            <%if(q.idr){%>
+                editDataRecipe(<%=q.idr%>);
+            <%}else{%>
+                console.log("No exite");
+                <%if(q.idp){%>
+                    editDataPaciente(<%=q.idp%>);
+                <%}%>
+            <%}%>
+            // editDataRecipe();
+        });
+        //Edit Data
+        function editDataRecipe(id){
+            console.log(id);
+            $.post('/recibo_tmp_model@getReciboComplete', {
+                id_recibo_tmp: id
+            }, function(res, textStatus, xhr) {
+                if(res){
+                    console.log(res);
+                    var dt_recibo = res.recibo_tmp[0];
+                    var dt_producto = res.producto_tmp;
+                    console.log(dt_recibo);
+                    $("#re_nro_recibo").val(dt_recibo.re_nro_recibo);
+                    $("#re_paciente_name").val(dt_recibo.re_paciente_name);
+                    $("#re_telefono").val(dt_recibo.re_telefono);
+                    $("#re_direccion").val(dt_recibo.re_direccion);
+                    $("#re_fecha_entrega").val(dt_recibo.re_fecha_entrega.split("T")[0]);
+                    $("#re_hora_entrega").val(dt_recibo.re_hora_entrega);
+                    $("#re_total").val(dt_recibo.re_total);
+                    $("#re_acuenta").val(dt_recibo.re_acuenta);
+                    $("#re_saldo").val(dt_recibo.re_saldo);
+                    $("#re_codigo").val(dt_recibo.re_codigo);
+                    //Obtenemos los productos en este recibo
+                    for( i in dt_producto ){
+                        addNewRowDetails('+',dt_producto[i]);
+
+                        console.log(dt_producto[i]);
+                    }
+                }else
+                    console.log("Error, no hay datos");
+
+                <%if(q.view == ""){%>
+                    $("input").attr("readonly",true);
+                <%}%>
+
+            });
+        }
+        //get Data Páciente easy Register
+        function editDataPaciente(id){
+            $.post('/paciente_get', {
+                idp: id
+            }, function(dt, textStatus, xhr) {
+                if(dt){
+                    console.log(dt[0]);
+                    $("#re_paciente_name").val(dt[0].fullname);
+                    $("#re_telefono").val(dt[0].telephone);
+                }else
+                    console.log("Error, no hay datos");
+                
+            });
+        }
+    </script>
+</body>
+</html>

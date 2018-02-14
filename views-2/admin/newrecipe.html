@@ -183,9 +183,9 @@
                                                 <!-- <input type="text" class="form-control" value="" id="add"> -->
                                             </td>
 
-                                    		<td><br><br><input type="text" class="form-control" value="" id="dip1"></td>
-                                    		<td><br><br><input type="text" class="form-control" value="" id="dip2"></td>
-                                    		<td><br><br><input type="text" class="form-control" value="" id="edad"></td>
+                                    		<td><br><br><input type="number" class="form-control" value="" id="dip1"></td>
+                                    		<td><br><br><input type="number" class="form-control" value="" id="dip2"></td>
+                                    		<td><br><br><input type="number" class="form-control" value="" id="edad"></td>
                                     		<th><br><br>años</th>
                                     	</tr>
                                     </table>
@@ -482,48 +482,54 @@
 
             });
         }
+        var r_r = true;
         function receta_register(){
-            var obj_in = {
-                id_receta: $("#id_receta").val()
-                ,esf_od: $("#esf_od").val()
-                ,esf_oi: $("#esf_oi").val()
-                ,cil_od: $("#cil_od").val()
-                ,cil_oi: $("#cil_oi").val()
-                ,eje_od: $("#eje_od").val()
-                ,eje_oi: $("#eje_oi").val()
-                // ,prisma_od: $("#prisma_od").val()
-                // ,prisma_oi: $("#prisma_oi").val()
-                // ,av_od: $("#av_od").val()
-                // ,av_oi: $("#av_oi").val()
-                ,add: $("#add").val()
-                ,dip1: $("#dip1").val()
-                ,dip2: $("#dip2").val()
-                ,edad: $("#edad").val()
-                ,recomendaciones: $("#recomendaciones").val()
-                ,producto: $("#producto").val()
-                ,precio: $("#precio").val()==""?0.00:$("#precio").val()
-                ,timestamp_aux: $("#timestamp_aux").val()
-                ,id_paciente: $("#id_paciente").html()
-                ,fullname: $("#fullname").val()
-                ,optica: $("#optica").val()
-            }
-            var err = verify(obj_in);
-            console.log("Error: "+err);
-            if(err){
-                $("#loading").hide();
-                return;
-            }
-            // alert($("#optica").val());
-            console.log("enviando al servidor");
-            // return;
-            $.post('/receta_register', obj_in, function(id_receta, textStatus, xhr) {
-                $("#loading").hide();
-                if(id_receta){
-                    clearInputs();
-                    window.location.href='admin_patientRecord?idp='+obj_in.id_paciente;
-                    
+            if(r_r){ //Presionado 1 ves
+                r_r = false; //desactivamos buttom
+                var obj_in = {
+                    id_receta: $("#id_receta").val()
+                    ,esf_od: $("#esf_od").val()
+                    ,esf_oi: $("#esf_oi").val()
+                    ,cil_od: $("#cil_od").val()
+                    ,cil_oi: $("#cil_oi").val()
+                    ,eje_od: $("#eje_od").val()
+                    ,eje_oi: $("#eje_oi").val()
+                    // ,prisma_od: $("#prisma_od").val()
+                    // ,prisma_oi: $("#prisma_oi").val()
+                    // ,av_od: $("#av_od").val()
+                    // ,av_oi: $("#av_oi").val()
+                    ,add: $("#add").val()
+                    ,dip1: $("#dip1").val()
+                    ,dip2: $("#dip2").val()
+                    ,edad: $("#edad").val()
+                    ,recomendaciones: $("#recomendaciones").val()
+                    ,producto: $("#producto").val().toUpperCase()
+                    ,precio: $("#precio").val()==""?0.00:$("#precio").val()
+                    ,timestamp_aux: $("#timestamp_aux").val()
+                    ,id_paciente: $("#id_paciente").html()
+                    ,fullname: $("#fullname").val().toUpperCase()
+                    ,optica: $("#optica").val()
                 }
-            });
+                var err = verify(obj_in);
+                console.log("Error: "+err);
+                if(err){
+                    $("#loading").hide();
+                    r_r = true;
+                    return;
+                }
+                // alert($("#optica").val());
+                console.log("enviando al servidor");
+                // return;
+                $.post('/receta_register', obj_in, function(id_receta, textStatus, xhr) {
+                    $("#loading").hide();
+                    if(id_receta){
+                        clearInputs();
+                        window.location.href='admin_patientRecord?idp='+obj_in.id_paciente;
+                        
+                    }
+                    r_r = true; //activamos button
+                });
+            }
         }
         function verify(obj_in){
             console.log("-------------------------------------------------");

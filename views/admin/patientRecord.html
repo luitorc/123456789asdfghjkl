@@ -68,6 +68,8 @@
                         </tr>
                     </table>
                     <div align="center">
+                        <button type="button" class="btn btn-info" onclick="window.location.href='admin_recibo_register?idp=<%=idp%>';">Nueva Venta</button>&nbsp;
+                        <button type="button" class="btn btn-info" onclick="listarVentas(<%=idp%>)">Listar Ventas</button>&nbsp;
                         <button type="button" class="btn btn-success" onclick="window.location.href='admin_newrecipe?idp=<%=idp%>';">Nueva Receta</button>&nbsp;
                         <button type="button" class="btn btn-warning" onclick="paciente_editar(<%=idp%>);">Editar Paciente</button>&nbsp;
                         <button type="button" class="btn btn-danger" onclick="paciente_delete(<%=idp%>);">Eliminar Paciente</button><br><br>    
@@ -94,6 +96,26 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="ventas_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Lista de Ventas</h4>
+          </div>
+          <div class="modal-body">
+            <div id='ventas_content'></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="lib/sb-admin-2/vendor/jquery/jquery.min.js"></script>
     <script src="lib/sb-admin-2/vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="lib/sb-admin-2/vendor/metisMenu/metisMenu.min.js"></script>
@@ -119,6 +141,61 @@
             <% } %>
             // receta_getlistXpatient(14);
         });
+        function viewRecipeSale(idr){
+            console.log(idr);
+            PopupCenter("admin_recibo_register?idr="+idr+"&view","Verificación del Recibo",500,500);
+        }
+       function PopupCenter(url, title, w, h) {
+            // Fixes dual-screen position                         Most browsers      Firefox
+            var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
+            var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
+
+            var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+            var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+
+            var left = ((width / 2) - (w / 2)) + dualScreenLeft;
+            var top = ((height / 2) - (h / 2)) + dualScreenTop;
+            var newWindow = window.open(url, title, 'scrollbars=yes, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+
+            // Puts focus on the newWindow
+            if (window.focus) {
+                newWindow.focus();
+            }
+        }
+        function listarVentas(idp){
+            $("#ventas_modal").modal('show');
+            console.log(idp);
+            $.post('/recibo_tmp_model@getAllVentasListXpaciente', {
+                id_paciente: idp
+            }, function(dt, textStatus, xhr) {
+                console.log(dt);
+                var dh="<table class='table'>"
+                        +"<tr>"
+                            +"<th>Nro</th>"
+                            +"<th>Fech. Entrega</th>"
+                            +"<th>Nro. Recibo</td>"
+                            +"<th>Telf.</td>"
+                            +"<th>Total</td>"
+                            +"<th>A cuenta</td>"
+                            +"<th>Saldo</td>"
+                            +"<th></td>"
+                        +"</tr>"
+                ;
+                for( i in dt ){
+                    dh+="<tr>"
+                            +"<td>"+(parseInt(i)+1)+"</td>"
+                            +"<td>"+dt[i].re_fecha_entrega.split("T")[0]+" "+dt[i].re_hora_entrega+"</td>"
+                            +"<td>"+dt[i].re_nro_recibo+"</td>"
+                            +"<td>"+dt[i].re_telefono+"</td>"
+                            +"<td>"+dt[i].re_total+"</td>"
+                            +"<td>"+dt[i].re_acuenta+"</td>"
+                            +"<td>"+dt[i].re_saldo+"</td>"
+                            +"<td><a onclick='viewRecipeSale("+dt[i].id_recibo_tmp+")'>Ver</a></td>"
+                        +"</tr>";
+                }
+                $("#ventas_content").html(dh);
+            });
+        }
         function paciente_get(idp,callback){
              $.post('/paciente_get', {
                 idp: idp
