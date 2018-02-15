@@ -58,29 +58,29 @@
                                         <td colspan="1" style="font-size:18px;">Fecha: 09/02/2018</td>
                                         <td colspan="1" align="right" style='font-size:20px;font-weight: bold;'> N°.</td>
                                         <td colspan="2"> 
-                                            <input type="text" class='form-control' value="123" id="re_nro_recibo">
+                                            <input type="text" class='form-control' value="" id="re_nro_recibo">
                                             <small>Numero de Recibo</small> 
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Paciente</td>
                                         <td colspan="3">
-                                            <input type="text" class='form-control' value="123" id="re_paciente_name">
+                                            <input type="text" class='form-control' value="" id="re_paciente_name">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Telefono</td>
                                         <td>
-                                            <input type="text" class='form-control' value="123" id="re_telefono">
+                                            <input type="text" class='form-control' value="" id="re_telefono">
                                         </td>
                                         <td>Codigo</td>
-                                        <td><input type="text" class='form-control' value="123" id="re_codigo">
+                                        <td><input type="text" class='form-control' value="" id="re_codigo">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Dirección</td>
                                         <td colspan="3">
-                                            <input type="text" class='form-control' value="123" id="re_direccion">
+                                            <input type="text" class='form-control' value="" id="re_direccion">
                                         </td>
                                     </tr>
                                     <tr>
@@ -111,27 +111,27 @@
                                             <div class="panel panel-default">
                                                 <div class="panel-body">
                                                     <div>Fecha de Entrega: </div>
-                                                    <input type="date" id="re_fecha_entrega" value="2017-05-12">
+                                                    <input type="date" id="re_fecha_entrega" value="">
                                                     <br>Hora: <br>
-                                                    <input type="time" id="re_hora_entrega" value="13:30:00">
+                                                    <input type="time" id="re_hora_entrega" value="">
                                                 </div>
                                             </div>
                                         </td>
                                         <td align="right" colspan="2">TOTAL (S/.)</td>
                                         <td>
-                                            <input type="text" class='form-control' value="123" id="re_total">
+                                            <input type="text" class='form-control' value="" id="re_total" readonly>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td align="right" colspan="2">A CUENTA (S/.)</td>
                                         <td>
-                                            <input type="text" class='form-control' value="123" id="re_acuenta">
+                                            <input type="text" class='form-control'  id="re_acuenta" value='0.00'>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td align="right" colspan="2">SALDO (S/.)</td>
                                         <td>
-                                            <input type="text" class='form-control' value="123" id="re_saldo">
+                                            <input type="text" class='form-control' id="re_saldo" readonly>
                                         </td>
                                     </tr>
                                     <%if(q.view == ""){%>
@@ -190,11 +190,33 @@
                 +"        <input type='text' class='form-control' id='pr_description' value='"+(obj.pr_description?obj.pr_description:'')+"'>"
                 +"    </td>"
                 +"    <td width='30%'>"
-                +"        <input type='text' class='form-control' id='pr_subtotal' value='"+(obj.pr_subtotal?obj.pr_subtotal:'')+"'>"
+                +"        <input type='text' class='form-control sub_total' id='pr_subtotal' value='"+(obj.pr_subtotal?obj.pr_subtotal:'')+"'>"
                 +"    </td>"
                 +"</tr>";
                 $("#descriptionContent").append(dh);
+                //add event and refresh
+                
+                $(".sub_total,#re_acuenta").off().on("keyup", function(event) {
+                    var total = 0;
+                    $(".sub_total").each(function(index, el) {
+                        //Realizamos calculo del total
+                        var subTotal = parseFloat($(el).val());
+                        total+=subTotal;
 
+                        
+                    });
+                    var acuenta = parseFloat( $("#re_acuenta").val() );
+                    var saldo = total - acuenta;
+                    // console.log( isNaN( total.toFixed(2) ) );
+                    if( isNaN( total.toFixed(2) ) ){
+                        $("#re_total").val( "Incorrecto" );
+                        $("#re_saldo").val( "Incorrecto" );
+                    }else{
+                        $("#re_total").val( total.toFixed(2) );
+                        $("#re_saldo").val( saldo.toFixed(2) );
+                        
+                    }
+                });
             }else{
                 if( $("#descriptionContent tr").length > 1 ){
                     contRowDetails--;
@@ -267,6 +289,10 @@
                 <%}%>
             <%}%>
             // editDataRecipe();
+
+            //Set Fecha entrega
+            $("#re_fecha_entrega").val( getDateStr() );
+            $("#re_hora_entrega").val( new Date().toLocaleTimeString() );
         });
         //Edit Data
         function editDataRecipe(id){
@@ -317,6 +343,24 @@
                     console.log("Error, no hay datos");
                 
             });
+        }
+        function getDateStr(){
+            // alert(new Date().toLocaleString());
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0!
+            var yyyy = today.getFullYear();
+
+            if(dd<10) {
+                dd = '0'+dd
+            } 
+
+            if(mm<10) {
+                mm = '0'+mm
+            } 
+
+            today = yyyy +'-'+ mm + '-' + dd;
+            return today;
         }
     </script>
 </body>
